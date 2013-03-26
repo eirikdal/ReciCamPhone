@@ -1,0 +1,57 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    x:Class="ReciCam.Windows.Phone.OcrPivotPage"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--Pivot Control-->
+        <phone:Pivot Title="RECICAM">
+            <!--Pivot item one-->
+            <phone:PivotItem Header="Select photo..">
+                <!--ContentPanel - place additional content here-->
+                <Grid x:Name="PhotosContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                    <ListBox x:Name="ListBoxPhotos">
+                        <toolkit:ListPicker x:Name="ListPickerPhotos" Margin="0">
+                            <toolkit:ListPicker.ItemTemplate>
+                                <DataTemplate>
+                                    <Canvas x:Name="CanvasPhotos" Width="320" Height="240" Loaded="OcrPivotPage_Load">
+                                        <!--Image for the camera capture.-->
+                                        <Image Width="320" Height="240" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding Photo}"/>
+
+                                        <!--TextBlock for status messages. -->
+                                        <TextBlock Canvas.Left="8" Canvas.Top="245" Height="69" x:Name="textStatus" Text="{Binding CapturedDateTime}" Width="440" />
+                                    </Canvas>
+                                </DataTemplate>
+                            </toolkit:ListPicker.ItemTemplate>
+                        </toolkit:ListPicker>   
+                    </ListBox>
+
+                    <Canvas x:Name="CanvasNewPhoto" Width="320" Height="240">
+                        <Button x:Name="ButtonNewPhoto" Click="ButtonNewPhoto_Click" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}">
+                            <!--Image for adding photo -->
+                            <Image x:Name="MainImage" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Assets/ModernUI/appbar.add.png"/>
+                        </Button>
+                    </Canvas>
+                </Grid>
+            </phone:PivotItem>
+
+            <!--Pivot item two-->
+            <phone:PivotItem Header="Find title..">
+                <Grid/>
+            </phone:PivotItem>
+        </phone:Pivot>
+    </Grid>
+
+</phone:PhoneApplicationPage>
