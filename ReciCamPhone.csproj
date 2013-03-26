@@ -176,8 +176,13 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\RecipeContent.cs" />
+    <Compile Include="Models\RecipeContentType.cs" />
     <Compile Include="Models\RecipePhoto.cs" />
     <Compile Include="Models\RecipeTitle.cs" />
+    <Compile Include="OcrCropImage.xaml.cs">
+      <DependentUpon>OcrCropImage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OcrPage.xaml.cs">
       <DependentUpon>OcrPage.xaml</DependentUpon>
     </Compile>
@@ -196,6 +201,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OcrCropImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -18,7 +18,7 @@
         <!--Pivot Control-->
         <phone:Pivot Title="ReciCam">
             <!--Pivot item one-->
-            <phone:PivotItem Header="Photos">
+            <phone:PivotItem Header="Photos" >
                 <Grid x:Name="PhotosContentGrid">
                     <!--ContentPanel - place additional content here-->
                     <Grid x:Name="PhotosContentPanel" Grid.Row="1" Margin="12,0,12,0">

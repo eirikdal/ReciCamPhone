@@ -28,7 +28,7 @@ namespace ReciCam.Windows.Phone
 
         private void CtaskOnCompleted(object sender, PhotoResult photoResult)
         {
-            ((App)Application.Current).RecipeService.AddRecipe(RecipePhoto.CreateFrom(photoResult));
+            ((App)Application.Current).RecipeService.AddRecipePhoto(RecipePhoto.CreateFrom(photoResult));
 
             NavigationService.Navigate(new Uri("/SplitterPivotPage.xaml", UriKind.Relative));
         }

@@ -9,12 +9,14 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using ReciCam.Windows.Phone.Models;
+using ReciCam.Windows.Phone.Services;
 
 namespace ReciCam.Windows.Phone
 {
     public partial class SplitterPivotPage : PhoneApplicationPage
     {
         private CameraCaptureTask ctask;
+        private RecipeService recipeService = ((App) Application.Current).RecipeService;
 
         public SplitterPivotPage()
         {
@@ -27,7 +29,7 @@ namespace ReciCam.Windows.Phone
 
         private void CtaskOnCompleted(object sender, PhotoResult photoResult)
         {
-            ((App)Application.Current).RecipeService.AddRecipe(RecipePhoto.CreateFrom(photoResult));
+            ((App)Application.Current).RecipeService.AddRecipePhoto(RecipePhoto.CreateFrom(photoResult));
 
             NavigationService.Navigate(new Uri("/SplitterPivotPage.xaml", UriKind.Relative));
         }
@@ -44,7 +46,9 @@ namespace ReciCam.Windows.Phone
 
         private void ButtonAddTitle_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            recipeService.RecipeContentType = RecipeContentType.Title;
+
+            NavigationService.Navigate(new Uri("/OcrPivotPage.xaml", UriKind.Relative));
         }
     }
 }
