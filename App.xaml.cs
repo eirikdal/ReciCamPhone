@@ -8,11 +8,13 @@ using System.Windows;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using ReciCam.Windows.Phone.Services;
 
 namespace ReciCam.Windows.Phone
 {
     public partial class App : Application
     {
+        public RecipeService RecipeService { get { return RecipeService.Instance; } private set { } }
         // Avoid double-initialization
         private bool phoneApplicationInitialized = false;
 

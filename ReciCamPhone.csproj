@@ -173,9 +173,12 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\RecipePhoto.cs" />
+    <Compile Include="Models\RecipeTitle.cs" />
     <Compile Include="OcrPage.xaml.cs">
       <DependentUpon>OcrPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\RecipeService.cs" />
     <Compile Include="SplitterPivotPage.xaml.cs">
       <DependentUpon>SplitterPivotPage.xaml</DependentUpon>
     </Compile>
