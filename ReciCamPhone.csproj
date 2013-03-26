@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OcrSampleAppLite</RootNamespace>
-    <AssemblyName>OcrSampleAppLite</AssemblyName>
+    <RootNamespace>ReciCam.Windows.Phone</RootNamespace>
+    <AssemblyName>ReciCam.Windows.Phone</AssemblyName>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>
     </SilverlightVersion>
@@ -24,7 +24,7 @@
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
     <XapFilename>ReciCamPhone_$(Configuration)_$(Platform).xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>OcrSampleAppLite.App</SilverlightAppEntry>
+    <SilverlightAppEntry>ReciCam.Windows.Phone.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
     <SccProjectName>
@@ -163,6 +163,7 @@
     <Reference Include="Microsoft.Hawaii.ClientBase">
       <HintPath>..\..\..\..\..\opt\microsoft\hawaii.phone\Microsoft Research\Project Hawaii SDK 2.1\Source\Common\ClientLibraryBase\Bin\Debug\Microsoft.Hawaii.ClientBase.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -174,6 +175,9 @@
     </Compile>
     <Compile Include="OcrPage.xaml.cs">
       <DependentUpon>OcrPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SplitterPivotPage.xaml.cs">
+      <DependentUpon>SplitterPivotPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -187,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="OcrPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SplitterPivotPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,7 +4,7 @@
 // </copyright>
 // -
 
-namespace OcrSampleAppLite
+namespace ReciCam.Windows.Phone
 {
     using System.Windows;
 

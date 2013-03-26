@@ -9,7 +9,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
-namespace OcrSampleAppLite
+namespace ReciCam.Windows.Phone
 {
     public partial class App : Application
     {

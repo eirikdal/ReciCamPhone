@@ -16,7 +16,7 @@ using Microsoft.Hawaii.Ocr.Client.ServiceResults;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 
-namespace OcrSampleAppLite
+namespace ReciCam.Windows.Phone
 {
     public partial class OcrPage : PhoneApplicationPage
     {

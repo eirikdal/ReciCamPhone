@@ -9,7 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 
-namespace OcrSampleAppLite
+namespace ReciCam.Windows.Phone
 {
     public partial class MainPage : PhoneApplicationPage
     {
@@ -26,7 +26,8 @@ namespace OcrSampleAppLite
 
         private void CtaskOnCompleted(object sender, PhotoResult photoResult)
         {
-            throw new NotImplementedException();
+            NavigationService.Navigate(new Uri("/SplitterPivotPage.xaml", UriKind.Relative));
+
         }
 
         private void New_Click(object sender, RoutedEventArgs e)
