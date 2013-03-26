@@ -19,34 +19,29 @@
         <phone:Pivot Title="ReciCam">
             <!--Pivot item one-->
             <phone:PivotItem Header="Photos">
-                <Grid x:Name="PhotosContent">
-                    <!--TitlePanel contains the name of the application and page title-->
-                    <StackPanel Grid.Row="0" Margin="12,17,0,28">
-                        <TextBlock Style="{StaticResource PhoneTextNormalStyle}">
-                            <Run Text="RECICAM" />
-                            <LineBreak />
-                            <Run />
-                        </TextBlock>
-                    </StackPanel>
-
-
+                <Grid x:Name="PhotosContentGrid">
                     <!--ContentPanel - place additional content here-->
-                    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                    <Grid x:Name="PhotosContentPanel" Grid.Row="1" Margin="12,0,12,0">
                         <ListBox x:Name="ListBoxPhotos">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Canvas x:Name="canvas" Width="320" Height="240">
+                                    <Canvas x:Name="CanvasPhotos" Width="320" Height="240">
                                         <!--Image for the camera capture.-->
-                                        <Image x:Name="MainImage" Width="320" Height="240" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding Photo}"/>
+                                        <Image Width="320" Height="240" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding Photo}"/>
 
                                         <!--TextBlock for status messages. -->
-                                        <TextBlock Canvas.Left="8" Canvas.Top="260" Height="69" Name="textStatus" Text="{Binding CapturedDateTime}" Width="440" />
+                                        <TextBlock Canvas.Left="8" Canvas.Top="245" Height="69" Name="textStatus" Text="{Binding CapturedDateTime}" Width="440" />
                                     </Canvas>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
 
-
+                        <Canvas x:Name="CanvasNewPhoto" Width="320" Height="240">
+                            <Button x:Name="ButtonNewPhoto" Click="ButtonNewPhoto_Click" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}">
+                                <!--Image for adding photo -->
+                                <Image x:Name="MainImage" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Assets/ModernUI/appbar.add.png"/>
+                            </Button>
+                        </Canvas>
                     </Grid>
 
                     <!--Show images captured here-->
@@ -55,7 +50,22 @@
 
             <!--Pivot item two-->
             <phone:PivotItem Header="Content">
-                <Grid />
+                <Grid x:Name="ContentsContentGrid">
+                    <Grid x:Name="ContentsContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                        <TextBlock Style="{StaticResource PhoneTextNormalStyle}">
+                            <Run Text="Add Title" />
+                            <LineBreak />
+                            <Run />
+                        </TextBlock>
+                        
+                        <Canvas x:Name="CanvasAddTitle" Width="320" Height="240">
+                            <Button x:Name="ButtonAddTitle" Click="ButtonAddTitle_Click" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}">
+                                <!--Image for adding title -->
+                                <Image x:Name="ImageAddTitle" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Assets/ModernUI/appbar.add.png"/>
+                            </Button>
+                        </Canvas>
+                    </Grid>
+                </Grid>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>
