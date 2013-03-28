@@ -176,22 +176,24 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\RecipeContent.cs" />
+    <Compile Include="Models\RecipeBase.cs" />
+    <Compile Include="Models\RecipeBaseContent.cs" />
+    <Compile Include="Models\RecipeBaseTitle.cs" />
     <Compile Include="Models\RecipeContentType.cs" />
     <Compile Include="Models\RecipePhoto.cs" />
-    <Compile Include="Models\RecipeTitle.cs" />
-    <Compile Include="OcrCropImage.xaml.cs">
-      <DependentUpon>OcrCropImage.xaml</DependentUpon>
+    <Compile Include="PageCropImage.xaml.cs">
+      <DependentUpon>PageCropImage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OcrPage.xaml.cs">
-      <DependentUpon>OcrPage.xaml</DependentUpon>
+    <Compile Include="PageEditContent.xaml.cs">
+      <DependentUpon>PageEditContent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OcrPivotPage.xaml.cs">
-      <DependentUpon>OcrPivotPage.xaml</DependentUpon>
+    <Compile Include="PageSelectPhoto.xaml.cs">
+      <DependentUpon>PageSelectPhoto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\ReciCamOcrService.cs" />
     <Compile Include="Services\RecipeService.cs" />
-    <Compile Include="SplitterPivotPage.xaml.cs">
-      <DependentUpon>SplitterPivotPage.xaml</DependentUpon>
+    <Compile Include="PageAddContent.xaml.cs">
+      <DependentUpon>PageAddContent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -204,21 +206,29 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OcrCropImage.xaml">
+    <Page Include="PageCropImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OcrPage.xaml">
+    <Page Include="PageEditContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OcrPivotPage.xaml">
+    <Page Include="PageSelectPhoto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SplitterPivotPage.xaml">
+    <Page Include="PageAddContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ApplicationBars.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -235,7 +245,6 @@
     <Content Include="Assets\Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
