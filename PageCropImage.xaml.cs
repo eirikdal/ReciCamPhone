@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Xna.Framework.Media;
+using ReciCam.Windows.Phone.Models;
 using ReciCam.Windows.Phone.Services;
 
 namespace ReciCam.Windows.Phone
@@ -31,7 +32,7 @@ namespace ReciCam.Windows.Phone
         //Variable for the help popup
         Popup help = new Popup();
 
-        //Variables for the crop feature
+        //Variables for the crop feature    
         Point p1, p2;
         bool cropping = false;
 
@@ -243,34 +244,7 @@ namespace ReciCam.Windows.Phone
             //Make progress bar visible for the event handler as there may be posible latency.
             ProgressBar.Visibility = Visibility.Visible;
 
-            NavigationService.Navigate(new Uri("/OcrPivotPage.xaml", UriKind.Relative));
-            //Create filename for JPEG in isolated storage
-/*            String tempJPEG = "TempJPEG.jpg";
-
-            //Create virtual store and file stream. Check for duplicate tempJPEG files.
-            var myStore = IsolatedStorageFile.GetUserStoreForApplication();
-            if (myStore.FileExists(tempJPEG))
-            {
-                myStore.DeleteFile(tempJPEG);
-            }
-            
-            IsolatedStorageFileStream myFileStream = myStore.CreateFile(tempJPEG);
-
-            //Encode the WriteableBitmap into JPEG stream and place into isolated storage.
-            Extensions.SaveJpeg(RecipeService.CroppedPhoto, myFileStream, RecipeService.CroppedPhoto.PixelWidth, RecipeService.CroppedPhoto.PixelHeight, 0, 85);
-            myFileStream.Close();
-
-            //Create a new file stream.
-            myFileStream = myStore.OpenFile(tempJPEG, FileMode.Open, FileAccess.Read);
-
-            //Add the JPEG file to the photos library on the device.
-            MediaLibrary library = new MediaLibrary();
-            Picture pic = library.SavePicture("SavedPicture.jpg", myFileStream);
-            myFileStream.Close();
-
-            ProgressBar.Visibility = Visibility.Collapsed;
-
-            TextStatus.Text = "Picture saved to photos library on the device.";*/
+            NavigationService.Navigate(new Uri("/PageAddContent.xaml", UriKind.Relative));
         }
 
 
@@ -298,8 +272,7 @@ namespace ReciCam.Windows.Phone
 
             // Create a new WriteableBitmap. The size of the bitmap is the size of the cropping rectangle
             // drawn by the user, multiplied by the image size ratio.
-            RecipeService.CroppedPhoto = new WriteableBitmap((int)(widthRatio * Math.Abs(p2.X - p1.X)), (int)(heightRatio * Math.Abs(p2.Y - p1.Y)));
-
+            RecipeService.CroppedPhoto = RecipePhoto.CreateFrom(new WriteableBitmap((int)(widthRatio * Math.Abs(p2.X - p1.X)), (int)(heightRatio * Math.Abs(p2.Y - p1.Y))));
 
             // Calculate the offset of the cropped image. This is the distance, in pixels, to the top left corner
             // of the cropping rectangle, multiplied by the image size ratio.
@@ -308,15 +281,15 @@ namespace ReciCam.Windows.Phone
 
             // Copy the pixels from the targeted region of the source image into the target image, 
             // using the calculated offset
-            for (int i = 0; i < RecipeService.CroppedPhoto.Pixels.Length; i++)
+            for (int i = 0; i < RecipeService.CroppedPhoto.Photo.Pixels.Length; i++)
             {
-                int x = (int)((i % RecipeService.CroppedPhoto.PixelWidth) + xoffset);
-                int y = (int)((i / RecipeService.CroppedPhoto.PixelWidth) + yoffset);
-                RecipeService.CroppedPhoto.Pixels[i] = RecipeService.PhotoToCrop.Photo.Pixels[y * RecipeService.PhotoToCrop.Photo.PixelWidth + x];
+                int x = (int)((i % RecipeService.CroppedPhoto.Photo.PixelWidth) + xoffset);
+                int y = (int)((i / RecipeService.CroppedPhoto.Photo.PixelWidth) + yoffset);
+                RecipeService.CroppedPhoto.Photo.Pixels[i] = RecipeService.PhotoToCrop.Photo.Pixels[y * RecipeService.PhotoToCrop.Photo.PixelWidth + x];
             }
 
             // Set the source of the image control to the new cropped bitmap
-            DisplayedImageElement.Source = RecipeService.CroppedPhoto;
+            DisplayedImageElement.Source = RecipeService.CroppedPhoto.Photo;
             rect.Visibility = Visibility.Collapsed;
 
 

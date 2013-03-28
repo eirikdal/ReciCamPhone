@@ -11,17 +11,24 @@ namespace ReciCam.Windows.Phone.Services
 {
     public class RecipeService
     {
-        private RecipeService() { RecipePhotos = new ObservableCollection<RecipePhoto>(); }
+        private RecipeService()
+        {
+            RecipePhotos = new ObservableCollection<RecipePhoto>();
+            RecipeBaseTitle = new RecipeBaseTitle();
+            RecipeBaseContents = new ObservableCollection<RecipeBaseContent>();
+        }
 
         public ObservableCollection<RecipePhoto> RecipePhotos { get; private set; }
+        public RecipeBaseTitle RecipeBaseTitle { get; private set; }
+        public ObservableCollection<RecipeBaseContent> RecipeBaseContents { get; private set; } 
 
         public RecipeContentType RecipeContentType { get; set; }
         public RecipePhoto PhotoToCrop { get; private set; }
-        public WriteableBitmap CroppedPhoto { get; set; }
+        public RecipePhoto CroppedPhoto { get; set; }
 
         public void SetPhotoToCrop(RecipePhoto recipePhoto)
         {
-            if (RecipeContentType == RecipeContentType.UNDEFINED)
+            if (RecipeContentType == RecipeContentType.Undefined)
             {
                 throw new AccessViolationException("Content type undefined. Set content type before calling this method");
             }
@@ -31,17 +38,23 @@ namespace ReciCam.Windows.Phone.Services
 
         public Boolean CanFlushCroppedPhoto()
         {
-            return (CroppedPhoto != null && (RecipeContentType != RecipeContentType.UNDEFINED));
+            return (CroppedPhoto != null && (RecipeContentType != RecipeContentType.Undefined));
         }
 
-        public RecipeContent FlushCroppedPhoto()
+        public void FlushCroppedPhoto()
         {
-            RecipeContent recipeContent = RecipeContent.createFrom(PhotoToCrop, RecipeContentType);
+            switch (RecipeContentType)
+            {
+                case RecipeContentType.Content:
+                    RecipeBaseContents.Add(RecipeBaseContent.CreateFrom(PhotoToCrop));
+                    break;
+                case RecipeContentType.Title:
+                    RecipeBaseTitle.RecipePhoto = CroppedPhoto;
+                    break;
+            }
 
             CroppedPhoto = null;
-            RecipeContentType = RecipeContentType.UNDEFINED;
-
-            return recipeContent;
+            RecipeContentType = RecipeContentType.Undefined;
         }
 
         public void AddRecipePhoto(RecipePhoto recipePhoto)

@@ -1,17 +1,18 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="ReciCam.Windows.Phone.SplitterPivotPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    x:Class="ReciCam.Windows.Phone.PageAddContent"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" Loaded="SplitterPivotPage_OnLoad">
+    shell:SystemTray.IsVisible="True" Loaded="PageAddContent_OnLoad">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -20,53 +21,72 @@
             <!--Pivot item one-->
             <phone:PivotItem Header="Photos" >
                 <Grid x:Name="PhotosContentGrid">
-                    <!--ContentPanel - place additional content here-->
-                    <Grid x:Name="PhotosContentPanel" Grid.Row="1" Margin="12,0,12,0">
-                        <ListBox x:Name="ListBoxPhotos">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Canvas x:Name="CanvasPhotos" Width="320" Height="240">
-                                        <!--Image for the camera capture.-->
-                                        <Image Width="320" Height="240" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding Photo}"/>
-
-                                        <!--TextBlock for status messages. -->
-                                        <TextBlock Canvas.Left="8" Canvas.Top="245" Height="69" Name="textStatus" Text="{Binding CapturedDateTime}" Width="440" />
-                                    </Canvas>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-
-                        <Canvas x:Name="CanvasNewPhoto" Width="320" Height="240">
-                            <Button x:Name="ButtonNewPhoto" Click="ButtonNewPhoto_Click" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}">
-                                <!--Image for adding photo -->
-                                <Image x:Name="MainImage" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Assets/ModernUI/appbar.add.png"/>
-                            </Button>
-                        </Canvas>
-                    </Grid>
 
                     <!--Show images captured here-->
+                    <!--ContentPanel - place additional content here-->
+                    <Grid x:Name="PhotosContentPanel" Grid.Row="0" Margin="12,0,12,0">
+                        <toolkit:ListPicker x:Name="ListBoxPhotos" BorderBrush="{x:Null}">
+                            <toolkit:ListPicker.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ShowGridLines="False">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition />
+                                            <RowDefinition Height="auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <!--Image for the camera capture.-->
+                                        <Image Grid.Column="0" Width="160" Height="160" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding Photo}"/>
+
+                                        <StackPanel Grid.Column="1" Margin="20">
+                                            <HyperlinkButton Click="ButtonAddTitle_Click" HorizontalAlignment="Left" FontSize="24">Add title..</HyperlinkButton>
+                                            <TextBlock HorizontalAlignment="Left" Style="{StaticResource PhoneTextNormalStyle}">
+							                    <Run FontSize="12" Text="Find title in photo" />
+                                            </TextBlock>
+                                            
+                                            <!--TextBlock for status messages. -->
+                                            <TextBlock FontSize="12" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="69" x:Name="textStatus" Text="{Binding CapturedDateTime}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </toolkit:ListPicker.ItemTemplate>
+                        </toolkit:ListPicker>
+                    </Grid>
+                    
+                    <Grid x:Name="PhotosAddedPanel" Grid.Row="1">
+                        <StackPanel>
+                            <TextBlock Text="photos added.."></TextBlock>
+
+                            <Image x:Name="ImageTitle" Width="160" Height="160" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding RecipePhoto}"/>
+
+                            <ListBox x:Name="ListBoxAddedPhotos" Grid.Column="0">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Image Width="160" Height="160" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding RecipePhoto}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Grid>
+
                 </Grid>
             </phone:PivotItem>
 
-            <!--Pivot item two-->
-            <phone:PivotItem Header="Content">
+<!--            ~1~Pivot item two@1@
+            <phone:PivotItem Header="Title">
                 <Grid x:Name="ContentsContentGrid">
-                    <Grid x:Name="ContentsContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                    <StackPanel Margin="20">
+                        <HyperlinkButton Click="ButtonAddTitle_Click" HorizontalAlignment="Left" FontSize="32">Add title..</HyperlinkButton>
                         <TextBlock Style="{StaticResource PhoneTextNormalStyle}">
-                            <Run Text="Add Title" />
-                            <LineBreak />
-                            <Run />
+							<Run FontSize="16" Text="Find title in photo" />
                         </TextBlock>
-                        
-                        <Canvas x:Name="CanvasAddTitle" Width="320" Height="240">
-                            <Button x:Name="ButtonAddTitle" Click="ButtonAddTitle_Click" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}">
-                                <!--Image for adding title -->
-                                <Image x:Name="ImageAddTitle" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Assets/ModernUI/appbar.add.png"/>
-                            </Button>
-                        </Canvas>
-                    </Grid>
+                        <Image Visibility="Collapsed" x:Name="ImageTitle" Width="160" Height="120"  Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding RecipePhoto.Photo, Mode=OneWay}"/>
+                    </StackPanel>
                 </Grid>
-            </phone:PivotItem>
+            </phone:PivotItem>-->
         </phone:Pivot>
     </Grid>
 
