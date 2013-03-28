@@ -14,6 +14,13 @@ namespace ReciCam.Windows.Phone.Models
         public WriteableBitmap Photo { get; set; }
         public DateTime CapturedDateTime { get; set; }
 
+        internal static RecipePhoto CreateFrom(WriteableBitmap photo)
+        {
+            var recipePhoto = new RecipePhoto { Photo = photo, CapturedDateTime = DateTime.Now };
+
+            return recipePhoto;
+        }
+
         internal static RecipePhoto CreateFrom(PhotoResult photoResult)
         {
             var recipePhoto = new RecipePhoto {Photo = PictureDecoder.DecodeJpeg(photoResult.ChosenPhoto), CapturedDateTime = DateTime.Now};

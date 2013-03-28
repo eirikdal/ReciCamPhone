@@ -2,7 +2,7 @@
 {
     public enum RecipeContentType
     {
-        UNDEFINED,
+        Undefined,
         Title,
         Content
     }
