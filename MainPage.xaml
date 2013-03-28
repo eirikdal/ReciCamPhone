@@ -27,7 +27,6 @@
             	<LineBreak/>
             	<Run/>
             </TextBlock>
-            <HyperlinkButton Content="New.." HorizontalAlignment="Left" VerticalAlignment="Top" Click="New_Click"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
