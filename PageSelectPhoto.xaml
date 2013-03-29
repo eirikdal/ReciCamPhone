@@ -23,32 +23,30 @@
             <phone:PivotItem Header="Select photo..">
                 <!--ContentPanel - place additional content here-->
                 <Grid x:Name="PhotosContentPanel" Grid.Row="1" Margin="12,0,12,0">
-                    <toolkit:ListPicker x:Name="ListPickerPhotos" Margin="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <toolkit:ListPicker BorderBrush="{x:Null}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" x:Name="ListPickerPhotos" Margin="10">
                         <toolkit:ListPicker.ItemTemplate>
                             <DataTemplate>
-                                <Canvas x:Name="CanvasPhotos" Width="320" Height="240">
+                                <StackPanel Width="Auto" Height="Auto">
                                     <!--Image for the camera capture.-->
-                                    <Image Width="320" Height="240" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding Photo}"/>
+                                    <Image Width="320" Height="240" HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding Photo}"/>
 
                                     <!--TextBlock for status messages. -->
-                                    <TextBlock Canvas.Left="8" Canvas.Top="245" Height="69" x:Name="textStatus" Text="{Binding CapturedDateTime}" Width="440" />
-                                </Canvas>
+                                    <TextBlock Height="69" x:Name="textStatus" Text="{Binding CapturedDateTime}" Width="440" />
+                                </StackPanel>
                             </DataTemplate>
                         </toolkit:ListPicker.ItemTemplate>
-                    </toolkit:ListPicker>   
-
-                    <Canvas x:Name="CanvasContinue" Width="320" Height="240">
-                        <Button x:Name="ButtonSelectPhoto" Click="ButtonSelectPhoto_Click" Background="{x:Null}" Foreground="{x:Null}" BorderBrush="{x:Null}">
-                            <!--Image for adding photo -->
-                            <Image x:Name="ImageSelectPhoto" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Assets/ModernUI/appbar.arrow.right.png"/>
-                        </Button>
-                    </Canvas>
+                    </toolkit:ListPicker>
                 </Grid>
-            </phone:PivotItem>
-
-            <!--Pivot item two-->
-            <phone:PivotItem Header="Find title..">
-                <Grid/>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>

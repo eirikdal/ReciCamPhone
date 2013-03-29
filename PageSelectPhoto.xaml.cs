@@ -16,9 +16,22 @@ namespace ReciCam.Windows.Phone
     {
         private RecipeService recipeService = ((App) Application.Current).RecipeService;
 
+        private ApplicationBarIconButton btnForward;
+
         public OcrPivotPage()
         {
             InitializeComponent();
+
+            ApplicationBar = new ApplicationBar();
+            ApplicationBar.IsVisible = true;
+            ApplicationBar.IsMenuEnabled = true;
+
+            btnForward = new ApplicationBarIconButton(new Uri("/Assets/ModernUI/appbar.arrow.right.png", UriKind.Relative));
+            btnForward.Text = "New";
+            btnForward.Click += new EventHandler(ButtonSelectPhoto_Click);
+            btnForward.IsEnabled = true;
+
+            ApplicationBar.Buttons.Add(btnForward);
         }
 
         private void OcrPivotPage_Load(object sender, RoutedEventArgs e)
@@ -26,11 +39,11 @@ namespace ReciCam.Windows.Phone
             ListPickerPhotos.ItemsSource = recipeService.RecipePhotos;
         }
 
-        private void ButtonSelectPhoto_Click(object sender, RoutedEventArgs e)
+        private void ButtonSelectPhoto_Click(object sender, EventArgs e)
         {
             recipeService.SetPhotoToCrop((RecipePhoto) ListPickerPhotos.SelectedItem);
 
-            NavigationService.Navigate(new Uri("/OcrCropImage.xaml", UriKind.Relative));            
+            NavigationService.Navigate(new Uri("/PageCropImage.xaml", UriKind.Relative));            
         }
     }
 }
