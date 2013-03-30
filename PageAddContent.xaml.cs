@@ -16,8 +16,9 @@ namespace ReciCam.Windows.Phone
 {
     public partial class PageAddContent : PhoneApplicationPage
     {
+        private readonly ReciCamOcrService _reciCamOcrService = ((App) Application.Current).ReciCamOcrService;
         private CameraCaptureTask ctask;
-        private RecipeService recipeService = ((App) Application.Current).RecipeService;
+        private readonly RecipeService _recipeService = ((App) Application.Current).RecipeService;
 
         private ApplicationBarIconButton btnNew;
         private ApplicationBarIconButton btnDone;
@@ -50,7 +51,8 @@ namespace ReciCam.Windows.Phone
 
         private void ButtonDone_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/PageEditContent.xaml", UriKind.Relative));
+            throw new NotImplementedException("Not implemented yet");
+            //NavigationService.Navigate(new Uri("/PageEditContent.xaml", UriKind.Relative));
         }
 
         private void CtaskOnCompleted(object sender, PhotoResult photoResult)
@@ -64,16 +66,25 @@ namespace ReciCam.Windows.Phone
         {
             base.OnNavigatedTo(e);
 
-            ImageTitle.DataContext = recipeService.RecipeBaseTitle;
-            ListBoxAddedPhotos.ItemsSource = recipeService.RecipeBaseContents;
-            ListBoxPhotos.ItemsSource = recipeService.RecipePhotos;
+            ImageTitle.DataContext = _recipeService.RecipeBaseTitle;
+            ListBoxAddedPhotos.ItemsSource = _recipeService.RecipeBaseContents;
+            ListBoxPhotos.ItemsSource = _recipeService.RecipePhotos;
+
+            _reciCamOcrService.StartOcrConversion(_recipeService.RecipeBaseTitle.RecipePhoto.Photo, OnTitleCompleted);
+            _requestCounter = 1;
+
+            foreach (RecipeBaseContent recipeBaseContent in _recipeService.RecipeBaseContents)
+            {
+                _reciCamOcrService.StartOcrConversion(recipeBaseContent.RecipePhoto.Photo, OnOcrCompleted);
+                _requestCounter++;
+            }
         }
 
         private void PageAddContent_OnLoad(object sender, RoutedEventArgs e)
         {
-            if (recipeService.CanFlushCroppedPhoto())
+            if (_recipeService.CanFlushCroppedPhoto())
             {
-                recipeService.FlushCroppedPhoto();
+                _recipeService.FlushCroppedPhoto();
             }
         }
 
@@ -95,8 +106,8 @@ namespace ReciCam.Windows.Phone
                 photoToCrop = (RecipePhoto)ListBoxPhotos.SelectedItem;
             }
 
-            recipeService.RecipeContentType = RecipeContentType.Title;
-            recipeService.SetPhotoToCrop(photoToCrop);
+            _recipeService.RecipeContentType = RecipeContentType.Title;
+            _recipeService.SetPhotoToCrop(photoToCrop);
 
             NavigationService.Navigate(new Uri("/PageCropImage.xaml", UriKind.Relative));
         }
