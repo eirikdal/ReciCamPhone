@@ -22,11 +22,7 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Style="{StaticResource PhoneTextNormalStyle}">
-            	<Run Text="RECICAM"/>
-            	<LineBreak/>
-            	<Run/>
-            </TextBlock>
+        	<TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="SNAPBOOK"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
