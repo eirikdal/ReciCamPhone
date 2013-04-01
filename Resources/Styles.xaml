@@ -3,14 +3,44 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
     mc:Ignorable="d">
     <Style TargetType="Button">
-        <Setter Property="Background">
+        <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Top"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"></Setter>
+    </Style>
+    <Style x:Key="OcrTextBox" TargetType="TextBox">
+        <Setter Property="Template">
             <Setter.Value>
-                <ImageBrush ImageSource="Assets\ModernUI\appbar.base.png" Stretch="Fill"></ImageBrush>
+                <ControlTemplate TargetType="TextBox">
+                    <Grid>
+                        <TextBox />
+                    </Grid>
+                </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="BorderBrush" Value="{x:Null}"></Setter>
-        <Setter Property="Foreground" Value="{x:Null}"></Setter>
-    </Style>    
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PhoneTextBoxEditBorderBrush}"/>
+        <Setter Property="CaretBrush" Value="{StaticResource PhoneTextCaretBrush}"/>
+        <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"/>
+        <Setter Property="SelectionForeground" Value="{StaticResource PhoneTextBoxSelectionForegroundBrush}"/>
+    </Style>
+    <Style x:Key="OcrTextButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Button Background="{StaticResource PhoneBackgroundBrush}" Foreground="{StaticResource PhoneForegroundBrush}" HorizontalContentAlignment="Left" RenderTransformOrigin="0.029,0.403" VerticalContentAlignment="Top"/>
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
