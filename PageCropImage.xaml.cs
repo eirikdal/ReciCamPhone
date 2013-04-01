@@ -23,12 +23,6 @@ namespace ReciCam.Windows.Phone
     {
         private RecipeService RecipeService = ((App)Application.Current).RecipeService;
 
-        //Variables for the application bar buttons
-        ApplicationBarIconButton btnCrop;
-        ApplicationBarIconButton btnAccept;
-        ApplicationBarIconButton btnReject;
-        ApplicationBarIconButton btnHelp;
-
         //Variable for the help popup
         Popup help = new Popup();
 
@@ -54,40 +48,6 @@ namespace ReciCam.Windows.Phone
             //Used for rendering the cropping rectangle on the image.
             CompositionTarget.Rendering += new EventHandler(CompositionTarget_Rendering);
 
-            //Creating an application bar and then setting visibility and menu properties.
-            ApplicationBar = new ApplicationBar();
-            ApplicationBar.IsVisible = true;
-            ApplicationBar.IsMenuEnabled = true;
-
-            //This code creates the application bar icon buttons.
-            btnCrop = new ApplicationBarIconButton(new Uri("/Assets/ModernUI/appbar.edit.png", UriKind.Relative));
-            btnAccept = new ApplicationBarIconButton(new Uri("/Assets/ModernUI/appbar.check.png", UriKind.Relative));
-            btnReject = new ApplicationBarIconButton(new Uri("/Assets/ModernUI/appbar.cancel.png", UriKind.Relative));
-            btnHelp = new ApplicationBarIconButton(new Uri("/Assets/ModernUI/appbar.questionmark.png", UriKind.Relative));
-
-            //Labels for the application bar buttons.
-            btnCrop.Text = "Crop";
-            btnAccept.Text = "Accept";
-            btnReject.Text = "Reject";
-            btnHelp.Text = "Help";
-
-            //This code adds buttons to application bar.
-            ApplicationBar.Buttons.Add(btnCrop);
-            ApplicationBar.Buttons.Add(btnAccept);
-            ApplicationBar.Buttons.Add(btnReject);
-            ApplicationBar.Buttons.Add(btnHelp);
-
-            //This code will create event handlers for buttons.
-            btnCrop.Click += new EventHandler(btnCrop_Click);
-            btnAccept.Click += new EventHandler(btnAccept_Click);
-            btnReject.Click += new EventHandler(btnReject_Click);
-            btnHelp.Click += new EventHandler(btnHelp_Click);
-
-            //Disable buttons so user cannot click until appropriate time.
-            btnCrop.IsEnabled = false;
-            btnAccept.IsEnabled = false;
-            btnReject.IsEnabled = false;
-
             //Begin storyboard for rectangle color effect.
             Rectangle.Begin();
         }
@@ -95,8 +55,6 @@ namespace ReciCam.Windows.Phone
         void btnHelp_Click(object sender, EventArgs e)
         {
             // Create a popup/message box for help and add content to the popup
-
-
             //Stack panel with a black background
             StackPanel panelHelp = new StackPanel();
             panelHelp.Background = new SolidColorBrush(Colors.Black);
@@ -260,7 +218,6 @@ namespace ReciCam.Windows.Phone
             // Get the size of the source image captured by the camera
             double originalImageWidth = RecipeService.PhotoToCrop.Photo.PixelWidth;
             double originalImageHeight = RecipeService.PhotoToCrop.Photo.PixelHeight;
-
 
             // Get the size of the image when it is displayed on the phone
             double displayedWidth = DisplayedImageElement.ActualWidth;
