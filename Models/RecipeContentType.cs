@@ -4,6 +4,7 @@
     {
         Undefined,
         Title,
-        Content
+        Content,
+        Ingredient
     }
 }

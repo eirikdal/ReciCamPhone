@@ -16,12 +16,13 @@ namespace ReciCam.Windows.Phone.Services
             RecipePhotos = new ObservableCollection<RecipePhoto>();
             RecipeBaseTitle = new RecipeBaseTitle();
             RecipeBaseContents = new ObservableCollection<RecipeBaseContent>();
+            RecipeBaseIngredients = new ObservableCollection<RecipeBaseIngredient>();
         }
 
         public ObservableCollection<RecipePhoto> RecipePhotos { get; private set; }
         public RecipeBaseTitle RecipeBaseTitle { get; private set; }
-        public ObservableCollection<RecipeBaseContent> RecipeBaseContents { get; private set; } 
-
+        public ObservableCollection<RecipeBaseContent> RecipeBaseContents { get; private set; }
+        public ObservableCollection<RecipeBaseIngredient> RecipeBaseIngredients { get; private set; }
         public RecipeContentType RecipeContentType { get; set; }
         public RecipePhoto PhotoToCrop { get; private set; }
         public RecipePhoto CroppedPhoto { get; set; }
@@ -45,6 +46,9 @@ namespace ReciCam.Windows.Phone.Services
         {
             switch (RecipeContentType)
             {
+                case RecipeContentType.Ingredient:
+                    RecipeBaseIngredients.Add(RecipeBaseIngredient.CreateFrom(PhotoToCrop));
+                    break;
                 case RecipeContentType.Content:
                     RecipeBaseContents.Add(RecipeBaseContent.CreateFrom(PhotoToCrop));
                     break;

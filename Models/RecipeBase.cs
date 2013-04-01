@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Hawaii.Ocr.Client.ServiceResults;
 
 namespace ReciCam.Windows.Phone.Models
 {
@@ -12,8 +13,9 @@ namespace ReciCam.Windows.Phone.Models
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public RecipePhoto _RecipePhoto { get; protected set; }
-        public String _ConvertedText { get; set; }
+        protected RecipePhoto _RecipePhoto { get; set; }
+        protected OcrServiceResult _OcrServiceResult { get; set; }
+        protected String _ConvertedText { get; set; }
 
         // NotifyPropertyChanged will raise the PropertyChanged event, 
         // passing the source property that is being updated.
@@ -31,5 +33,7 @@ namespace ReciCam.Windows.Phone.Models
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public abstract void OnOcrCompleted(OcrServiceResult ocrServiceResult);
     }
 }
