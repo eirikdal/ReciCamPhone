@@ -12,6 +12,11 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
+	<phone:PhoneApplicationPage.ApplicationBar>
+		<shell:ApplicationBar>
+			<shell:ApplicationBarIconButton x:Name="ButtonNew" IconUri="/Assets/ModernUI/appbar.new.png" IsEnabled="True" Text="New" Click="New_Click"/>
+		</shell:ApplicationBar>
+	</phone:PhoneApplicationPage.ApplicationBar>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -22,11 +27,23 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-        	<TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="SNAPBOOK"/>
+        	<TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="{StaticResource ApplicationName}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"/>
+        <Grid x:Name="ContentPanel" Grid.Row="1">
+        	<Grid Height="214" Width="444" VerticalAlignment="Top" HorizontalAlignment="Center">
+        		<Grid.RowDefinitions>
+        			<RowDefinition Height="Auto"/>
+        			<RowDefinition Height="Auto"/>
+        			<RowDefinition Height="Auto"/>
+        			<RowDefinition Height="Auto"/>
+        		</Grid.RowDefinitions>
+        		<Button Content="My recipes" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1"/>
+        		<Button Content="Friends" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2"/>
+        		<TextBlock TextWrapping="Wrap" Text="Main menu" VerticalAlignment="Top" FontSize="42.667" FontWeight="Bold" HorizontalAlignment="Center"/>
+        	</Grid>
+        </Grid>
     </Grid>
 
 </phone:PhoneApplicationPage>
