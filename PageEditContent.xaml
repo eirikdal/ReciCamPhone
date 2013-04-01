@@ -16,29 +16,6 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <phone:Pivot Title="RECICAM">
-            <!--Pivot item one-->
-            <phone:PivotItem Header="Title">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBox BorderBrush="{x:Null}" Background="{StaticResource PhoneBackgroundBrush}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" x:Name="TextBoxTitle" HorizontalAlignment="Left" Height="Auto"  TextWrapping="Wrap" VerticalAlignment="Top" Width="456"/>
-                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="TextBlockTitle" HorizontalAlignment="Left" Height="Auto"  TextWrapping="Wrap" VerticalAlignment="Top" Width="456"/>
-                    <Image Grid.Column="0" Grid.Row="1" x:Name="ImageTitle" Width="160" Height="120"  Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Source="{Binding RecipePhoto.Photo, Mode=OneWay}"/>
-                </Grid>
-            </phone:PivotItem>
-
-            <!--Pivot item two-->
-            <phone:PivotItem Header="Contents">
-            </phone:PivotItem>
-        </phone:Pivot>
 
         <ProgressBar Height="10" x:Name="ProgressBar" Visibility="Collapsed" Margin="12,0,8,255" IsIndeterminate="True"  VerticalAlignment="Bottom"  />
     </Grid>

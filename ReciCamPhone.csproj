@@ -51,6 +51,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <ExpressionBlendVersion>5.0.40218.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -161,7 +162,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Hawaii.ClientBase">
-      <HintPath>..\Microsoft.Hawaii.Phone\Common\ClientLibraryBase\Bin\Debug_Fast\Microsoft.Hawaii.ClientBase.dll</HintPath>
+      <HintPath>..\..\..\..\..\opt\microsoft\hawaii.phone\Microsoft Research\Project Hawaii SDK 2.1\Source\Common\ClientLibraryBase\Bin\Debug\Microsoft.Hawaii.ClientBase.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
@@ -178,17 +179,12 @@
     </Compile>
     <Compile Include="Models\RecipeBase.cs" />
     <Compile Include="Models\RecipeBaseContent.cs" />
+    <Compile Include="Models\RecipeBaseIngredient.cs" />
     <Compile Include="Models\RecipeBaseTitle.cs" />
     <Compile Include="Models\RecipeContentType.cs" />
     <Compile Include="Models\RecipePhoto.cs" />
     <Compile Include="PageCropImage.xaml.cs">
       <DependentUpon>PageCropImage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PageEditContent.xaml.cs">
-      <DependentUpon>PageEditContent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PageSelectPhoto.xaml.cs">
-      <DependentUpon>PageSelectPhoto.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\ReciCamOcrService.cs" />
     <Compile Include="Services\RecipeService.cs" />
@@ -202,19 +198,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Resources\GlobalResources.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageCropImage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PageEditContent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PageSelectPhoto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
