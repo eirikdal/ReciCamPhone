@@ -3,7 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:system="clr-namespace:System;assembly=mscorlib"
     mc:Ignorable="d">
     <Style TargetType="Button">
         <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}" />
@@ -14,33 +13,55 @@
         <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
         <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"></Setter>
     </Style>
-    <Style x:Key="OcrTextBox" TargetType="TextBox">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
-                    <Grid>
-                        <TextBox />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+    <Style x:Key="OcrTitle" TargetType="TextBox">
+    	<Setter Property="FontFamily" Value="Segoe WP Light"/>
+    	<Setter Property="FontSize" Value="48"/>
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="Background" Value="{StaticResource TransparentBrush}"/>
+        <Setter Property="AcceptsReturn" Value="True"></Setter>
+        <Setter Property="InputScope" Value="Text"></Setter>
         <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource PhoneTextBoxEditBorderBrush}"/>
         <Setter Property="CaretBrush" Value="{StaticResource PhoneTextCaretBrush}"/>
-        <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"/>
-        <Setter Property="SelectionForeground" Value="{StaticResource PhoneTextBoxSelectionForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TransparentBrush}"/>
+        <Setter Property="SelectionBackground" Value="{StaticResource PhoneInverseInactiveBrush}"/>
+    </Style>
+    <Style x:Key="OcrTextBox" TargetType="TextBox">
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="Foreground" Value="WhiteSmoke"/>
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="CaretBrush" Value="WhiteSmoke"/>
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="SelectionForeground" Value="White"/>
+        <Setter Property="AcceptsReturn" Value="True"></Setter>
+        <Setter Property="SelectionBackground" Value="Black"></Setter>
+        <Setter Property="InputScope" Value="Text"></Setter>
+    </Style>
+    <Style x:Key="OcrContents" TargetType="TextBox">
+        <Setter Property="FontFamily" Value="Segoe"></Setter>
+        <Setter Property="FontSize" Value="10.667"></Setter>
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="Foreground" Value="WhiteSmoke"/>
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="CaretBrush" Value="WhiteSmoke"/>
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="SelectionForeground" Value="White"/>
+        <Setter Property="AcceptsReturn" Value="True"></Setter>
+        <Setter Property="SelectionBackground" Value="Black"></Setter>
+        <Setter Property="InputScope" Value="Text"></Setter>
     </Style>
     <Style x:Key="OcrTextButton" TargetType="Button">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Button Background="{StaticResource PhoneBackgroundBrush}" Foreground="{StaticResource PhoneForegroundBrush}" HorizontalContentAlignment="Left" RenderTransformOrigin="0.029,0.403" VerticalContentAlignment="Top"/>
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Top"></Setter>
     </Style>
+    <Style x:Key="OcrIconButton" TargetType="Button">
+        <Setter Property="BorderBrush" Value="{x:Null}"></Setter>
+        <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"></Setter>
+    </Style>
+    <Style x:Key="TextBlockTitle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe WP SemiLight"></Setter>
+        <Setter Property="FontSize" Value="32"></Setter>
+    </Style>
+    <Style x:Key="MenuGrid" TargetType="Grid"/>
 </ResourceDictionary>
