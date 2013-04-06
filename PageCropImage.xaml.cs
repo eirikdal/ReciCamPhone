@@ -21,7 +21,13 @@ namespace ReciCam.Windows.Phone
 {
     public partial class OcrCropImage : PhoneApplicationPage
     {
-        private RecipeService RecipeService = ((App)Application.Current).RecipeService;
+        private readonly RecipePhotoService _recipePhotoService = ((App)Application.Current).RecipePhotoService;
+        private readonly ReciCamOcrService _reciCamOcrService = ((App)Application.Current).ReciCamOcrService;
+
+        private ApplicationBarIconButton btnReject;
+        private ApplicationBarIconButton btnCrop;
+        private ApplicationBarIconButton btnAccept;
+        private ApplicationBarIconButton btnHelp;
 
         //Variable for the help popup
         Popup help = new Popup();
@@ -34,11 +40,17 @@ namespace ReciCam.Windows.Phone
         {
             InitializeComponent();
 
+            btnCrop = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+            btnAccept = ApplicationBar.Buttons[1] as ApplicationBarIconButton;
+            btnReject = ApplicationBar.Buttons[2] as ApplicationBarIconButton;
+            btnHelp = ApplicationBar.Buttons[3] as ApplicationBarIconButton;
+
             TextStatus.Text = "Select the cropping region with your finger." +
                               " Once completed, tap the crop button to crop the image.";
 
             //Sets the source to the Image control on the crop page to the WriteableBitmap object created previously.
-            DisplayedImageElement.Source = RecipeService.PhotoToCrop.Photo;
+            var recipePhoto = _recipePhotoService.RecipeBaseTarget.RecipePhoto;
+            DisplayedImageElement.Source = recipePhoto.Photo;
 
             //Create event handlers for cropping selection on the picture.
             DisplayedImageElement.MouseLeftButtonDown += new MouseButtonEventHandler(CropImage_MouseLeftButtonDown);
@@ -178,7 +190,7 @@ namespace ReciCam.Windows.Phone
         void btnReject_Click(object sender, EventArgs e)
         {
             //Sets the cropped image back to the original image. For users that want to revert changes.
-            DisplayedImageElement.Source = RecipeService.PhotoToCrop.Photo;
+            DisplayedImageElement.Source = _recipePhotoService.RecipeBaseTarget.RecipePhoto.Photo;
 
             //Buttons are disabled and user cannot proceed to use the below until they crop an image again.
             btnCrop.IsEnabled = false;
@@ -202,9 +214,10 @@ namespace ReciCam.Windows.Phone
             //Make progress bar visible for the event handler as there may be posible latency.
             ProgressBar.Visibility = Visibility.Visible;
 
+            _reciCamOcrService.StartOcrConversion(_recipePhotoService.RecipeBaseTarget);
+
             NavigationService.Navigate(new Uri("/PageAddContent.xaml", UriKind.Relative));
         }
-
 
 
         /// <summary>
@@ -215,40 +228,15 @@ namespace ReciCam.Windows.Phone
         /// <param name="e"></param>
         void btnCrop_Click(object sender, EventArgs e)
         {
-            // Get the size of the source image captured by the camera
-            double originalImageWidth = RecipeService.PhotoToCrop.Photo.PixelWidth;
-            double originalImageHeight = RecipeService.PhotoToCrop.Photo.PixelHeight;
+            RecipePhoto sourcePhoto = _recipePhotoService.RecipeBaseTarget.RecipePhoto;
 
-            // Get the size of the image when it is displayed on the phone
-            double displayedWidth = DisplayedImageElement.ActualWidth;
-            double displayedHeight = DisplayedImageElement.ActualHeight;
+            RecipePhoto targetPhoto = _recipePhotoService.CropImage(sourcePhoto.Photo, DisplayedImageElement, p1, p2);
 
-            // Calculate the ratio of the original image to the displayed image
-            double widthRatio = originalImageWidth / displayedWidth;
-            double heightRatio = originalImageHeight / displayedHeight;
-
-            // Create a new WriteableBitmap. The size of the bitmap is the size of the cropping rectangle
-            // drawn by the user, multiplied by the image size ratio.
-            RecipeService.CroppedPhoto = RecipePhoto.CreateFrom(new WriteableBitmap((int)(widthRatio * Math.Abs(p2.X - p1.X)), (int)(heightRatio * Math.Abs(p2.Y - p1.Y))));
-
-            // Calculate the offset of the cropped image. This is the distance, in pixels, to the top left corner
-            // of the cropping rectangle, multiplied by the image size ratio.
-            int xoffset = (int)(((p1.X < p2.X) ? p1.X : p2.X) * widthRatio);
-            int yoffset = (int)(((p1.Y < p2.Y) ? p1.Y : p2.X) * heightRatio);
-
-            // Copy the pixels from the targeted region of the source image into the target image, 
-            // using the calculated offset
-            for (int i = 0; i < RecipeService.CroppedPhoto.Photo.Pixels.Length; i++)
-            {
-                int x = (int)((i % RecipeService.CroppedPhoto.Photo.PixelWidth) + xoffset);
-                int y = (int)((i / RecipeService.CroppedPhoto.Photo.PixelWidth) + yoffset);
-                RecipeService.CroppedPhoto.Photo.Pixels[i] = RecipeService.PhotoToCrop.Photo.Pixels[y * RecipeService.PhotoToCrop.Photo.PixelWidth + x];
-            }
+            sourcePhoto.Photo = targetPhoto.Photo;
 
             // Set the source of the image control to the new cropped bitmap
-            DisplayedImageElement.Source = RecipeService.CroppedPhoto.Photo;
+            DisplayedImageElement.Source = sourcePhoto.Photo;
             rect.Visibility = Visibility.Collapsed;
-
 
             //Enable  accept and reject buttons to save or discard current cropped image.
             //Disable crop button until a new cropping region is selected.

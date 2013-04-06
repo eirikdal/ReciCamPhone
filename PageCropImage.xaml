@@ -15,10 +15,10 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar>
-            <shell:ApplicationBarIconButton x:Name="btnCrop" IconUri="/Assets/ModernUI/appbar.edit.png" Click="btnCrop_Click" IsEnabled="False" Text="Crop"/>
-            <shell:ApplicationBarIconButton x:Name="btnAccept" IconUri="/Assets/ModernUI/appbar.check.png" Click="btnAccept_Click" IsEnabled="False" Text="Accept"/>
-            <shell:ApplicationBarIconButton x:Name="btnReject" IconUri="/Assets/ModernUI/appbar.cancel.png" Click="btnReject_Click" IsEnabled="False" Text="Reject"/>
-            <shell:ApplicationBarIconButton x:Name="btnHelp" IconUri="/Assets/ModernUI/appbar.question.png" Click="btnHelp_Click" IsEnabled="True" Text="Help"/>
+            <shell:ApplicationBarIconButton x:Name="BtnCrop" IconUri="/Assets/ModernUI/appbar.edit.png" Click="btnCrop_Click" IsEnabled="False" Text="Crop"/>
+            <shell:ApplicationBarIconButton x:Name="BtnAccept" IconUri="/Assets/ModernUI/appbar.check.png" Click="btnAccept_Click" IsEnabled="False" Text="Accept"/>
+            <shell:ApplicationBarIconButton x:Name="BtnReject" IconUri="/Assets/ModernUI/appbar.cancel.png" Click="btnReject_Click" IsEnabled="False" Text="Reject"/>
+            <shell:ApplicationBarIconButton x:Name="BtnHelp" IconUri="/Assets/ModernUI/appbar.question.png" Click="btnHelp_Click" IsEnabled="True" Text="Help"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
