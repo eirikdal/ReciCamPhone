@@ -16,6 +16,8 @@ namespace ReciCam.Windows.Phone
     {
         public RecipeService RecipeService { get { return RecipeService.Instance; } private set { } }
         public ReciCamOcrService ReciCamOcrService { get { return ReciCamOcrService.Instance; } private set { } }
+        public RecipePhotoService RecipePhotoService { get { return RecipePhotoService.Instance; } private set { } }
+
         // Avoid double-initialization
         private bool phoneApplicationInitialized = false;
 
