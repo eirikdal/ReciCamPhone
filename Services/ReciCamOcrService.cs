@@ -9,12 +9,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Microsoft.Hawaii;
 using Microsoft.Hawaii.Ocr.Client;
+using Microsoft.Hawaii.Ocr.Client.Model;
 using Microsoft.Hawaii.Ocr.Client.ServiceResults;
+using ReciCam.Windows.Phone.Models;
 
 namespace ReciCam.Windows.Phone.Services
 {
     public class ReciCamOcrService
     {
+        private readonly RecipePhotoService _recipePhotoService = ((App)Application.Current).RecipePhotoService;
+
         /// <summary>
         /// The diagonal of the scaled-down image size.
         /// </summary>
@@ -24,92 +28,29 @@ namespace ReciCam.Windows.Phone.Services
         {
         }
 
-        /// <summary>
-        /// If the image contained in the imageStream has a diagonal greater than imageMaxSizeDiagonal then 
-        /// LimitImageSize will scale-down the image so that its diagonal will be equal to imageMaxSizeDiagonal  
-        /// preserving the aspect ratio.
-        /// If the image contained in the imageStream has a diagonal less than or equal to imageMaxSizeDiagonal  then 
-        /// LimitImageSize will simply return the original stream.
-        /// </summary>
-        /// <param name="imageStream">
-        /// A stream containing the image.
-        /// </param>
-        /// <param name="imageMaxDiagonalSize">
-        /// The maximum value for the diagonal of the image.
-        /// </param>
-        /// <returns>
-        /// It is either the original imageStream or a stream containing a scaled down version of the image.
-        /// </returns>
-        private static Stream LimitImageSize(WriteableBitmap wb, double imageMaxDiagonalSize)
+        private void OnOcrRecipeBaseComplete(OcrServiceResult result)
         {
-            // Check if we need to scale it down.
-            double imageDiagonalSize = Math.Sqrt(wb.PixelWidth * wb.PixelWidth + wb.PixelHeight * wb.PixelHeight);
-            if (imageDiagonalSize > imageMaxDiagonalSize)
-            {
-                // Calculate the new image size that corresponds to imageMaxDiagonalSize for the 
-                // diagonal size and that preserves the aspect ratio.
-                int newWidth = (int) (wb.PixelWidth*imageMaxDiagonalSize/imageDiagonalSize);
-                int newHeight = (int) (wb.PixelHeight*imageMaxDiagonalSize/imageDiagonalSize);
-
-                Stream resizedStream = null;
-                Stream tempStream = null;
-
-                // This try/finally block is needed to avoid CA2000: Dispose objects before losing scope
-                // See http://msdn.microsoft.com/en-us/library/ms182289.aspx for more details.
-                try
-                {
-                    tempStream = new MemoryStream();
-                    Extensions.SaveJpeg(wb, tempStream, newWidth, newHeight, 0, 100);
-                    resizedStream = tempStream;
-                    tempStream = null;
-                }
-                finally
-                {
-                    if (tempStream != null)
-                    {
-                        tempStream.Close();
-                        tempStream = null;
-                    }
-                }
-
-                return resizedStream;
-            }
-            else
-            {
-                // No need to scale down. The image diagonal is less than or equal to imageMaxSizeDiagonal.
-                var tempStream = new MemoryStream();
-                Extensions.SaveJpeg(wb, tempStream, wb.PixelWidth, wb.PixelHeight, 0, 100);
-
-                return tempStream;
-            }
+            _recipePhotoService.RecipeBaseTarget.OcrServiceResult = result;
+            RecipeBase recipeBaseTarget = _recipePhotoService.RecipeBaseTarget;
+            result.OcrResult.OcrTexts.ForEach(ocrText => recipeBaseTarget.Text += recipeBaseTarget.FormatOcrText(ocrText));
         }
 
-        private static byte[] StreamToByteArray(Stream stream)
+        public void StartOcrConversion(RecipeBase recipeBaseTarget)
         {
-            byte[] buffer = new byte[stream.Length];
-
-            long seekPosition = stream.Seek(0, SeekOrigin.Begin);
-            int bytesRead = stream.Read(buffer, 0, buffer.Length);
-            seekPosition = stream.Seek(0, SeekOrigin.Begin);
-
-            return buffer;
-        }
-
-        public void StartOcrConversion(WriteableBitmap photo, ServiceAgent<OcrServiceResult>.OnCompleteDelegate onComplete)
-        {
+            var photo = recipeBaseTarget.RecipePhoto.Photo;
             // Images that are too large will take too long to transfer to the Hawaii OCR service.
             // Also images that are too large may contain text that is too big and that will be excluded from the OCR process.
             // If necessary, we will scale-down the image.
-            var photoStream = LimitImageSize(photo, ImageMaxSizeDiagonal);
+            var photoStream = RecipePhotoService.LimitImageSize(photo, ImageMaxSizeDiagonal);
 
             // Convert the photo stream to bytes.
-            byte[] photoBuffer = StreamToByteArray(photoStream);
-
+            byte[] photoBuffer = RecipePhotoService.StreamToByteArray(photoStream);
+            
             // Instantiate the service proxy, set the oncomplete event handler, and trigger the asynchronous call.
             OcrService.RecognizeImageAsync(
                 HawaiiClient.HawaiiApplicationId,
                 photoBuffer,
-                (output) => Deployment.Current.Dispatcher.BeginInvoke(() => onComplete(output)));
+                (output) => Deployment.Current.Dispatcher.BeginInvoke(() => OnOcrRecipeBaseComplete(output)));
         }
 
         // Private 'instance' variable

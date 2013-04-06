@@ -5,75 +5,71 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:Models="clr-namespace:ReciCam.Windows.Phone.Models"
+    xmlns:Services="clr-namespace:ReciCam.Windows.Phone.Services"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     x:Class="ReciCam.Windows.Phone.PageAddContent"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" Loaded="PageAddContent_OnLoad">
+    shell:SystemTray.IsVisible="True" d:DataContext="{d:DesignData /SampleData/RecipePhotoServiceSampleData.xaml}">
 	<phone:PhoneApplicationPage.ApplicationBar>
 		<shell:ApplicationBar>
-            <shell:ApplicationBarIconButton IconUri="/Assets/ModernUI/appbar.camera.png" Click="ButtonNewPhoto_Click" IsEnabled="True" Text="New"/>
+			<shell:ApplicationBar.MenuItems>
+				<shell:ApplicationBarMenuItem x:Name="menuItemAddIngredients" Text="Add ingredients.." Click="ButtonChoosePhotoForIngredients_Click"/>
+				<shell:ApplicationBarMenuItem x:Name="menuItemAddDescription" Text="add description.." Click="ButtonChoosePhotoForDescription_Click"/>
+				<shell:ApplicationBarMenuItem x:Name="menuItemAddContent" Text="add content.." Click="ButtonChoosePhotoForContent_Click"/>
+			</shell:ApplicationBar.MenuItems>
             <shell:ApplicationBarIconButton IconUri="/Assets/ModernUI/appbar.check.png" Click="ButtonDone_Click" IsEnabled="True" Text="Done"/>
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
+	<!--LayoutRoot is the root grid where all page content is placed-->
 	<Grid x:Name="LayoutRoot" Background="Transparent">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
 		<!--Pivot Control-->
-		<phone:Pivot Title="{StaticResource ApplicationName}" Margin="2,0,-2,0">
-			<!--Pivot item one-->
-			<phone:PivotItem x:Name="FindTitlePivot" Header="Find title.." >
-				<Grid x:Name="AddTitleGrid" Margin="0,0,0,2">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto"/>
-						<RowDefinition Height="Auto"/>
-						<RowDefinition Height="Auto"/>
-					</Grid.RowDefinitions>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-					</Grid.ColumnDefinitions>
-                    <TextBox x:Name="OcrTitleTextBox" Text="{Binding ConvertedText}" Grid.ColumnSpan="2" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" ToolTipService.ToolTip="Foo" />
-					<Image x:Name="ImageChosenPhoto" HorizontalAlignment="Left" Height="100" Margin="0,0,0,-28" VerticalAlignment="Top" Width="100" Grid.Row="2" Grid.ColumnSpan="2" Visibility="Collapsed"/>
-					<Button x:Name="ButtonChoosePhotoForTitle" Content="Choose photo.." Background="{StaticResource PhoneBackgroundBrush}" RenderTransformOrigin="0.029,0.403" Grid.Row="1" Foreground="{StaticResource PhoneForegroundBrush}" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Click="ButtonChoosePhotoForTitle_Click" Style="{StaticResource OcrTextButton}"/>
-					<!--Show images captured here-->
-
-				</Grid>
-			</phone:PivotItem>
-			<phone:PivotItem x:Name="FindIngredientsPitvot" Header="Find description..">
-				<Grid x:Name="FindIngredientsGrid">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto"/>
-						<RowDefinition Height="Auto"/>
-					</Grid.RowDefinitions>
-					<Button x:Name="ButtonChoosePhotoForIngredients" Content="Choose photo.." Style="{StaticResource OcrTextButton}" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Click="ButtonChoosePhotoForIngredient_Click"/>
-					<ListBox x:Name="ListBoxIngredients" HorizontalAlignment="Left" VerticalAlignment="Top">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<TextBox HorizontalAlignment="Left" Height="38" TextWrapping="Wrap" VerticalAlignment="Top" Width="436" Text="{Binding ConvertedText}" Style="{StaticResource OcrTextBox}"/>	
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
-				</Grid>
-			</phone:PivotItem>
-			<phone:PivotItem x:Name="FindDescriptionPivot" Header="Find description..">
-				<Grid x:Name="FindDescriptionGrid">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto"/>
-						<RowDefinition Height="Auto"/>
-					</Grid.RowDefinitions>
-					<TextBox Text="{Binding ConvertedText}"  x:Name="OcrContentTextBox" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Style="{StaticResource OcrTextBox}"/>
-					<Button x:Name="ButtonChoosePhotoForDescription" Content="Choose photo.." Style="{StaticResource OcrTextButton}" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Click="ButtonChoosePhotoForContent_Click"/>
-				</Grid>
-			</phone:PivotItem>
-		</phone:Pivot>
 		<Path Data="M864.179,-91.7015" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="0" Margin="864.179,-91.701,-384.179,0" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" VerticalAlignment="Top" Width="0"/>
         
 		<ProgressBar Height="10" x:Name="ProgressBar" Visibility="Collapsed" Margin="12,0,8,255" IsIndeterminate="True"  VerticalAlignment="Bottom"  />
+		<Grid x:Name="AddTitleGrid" Style="{StaticResource MenuGrid}" Margin="12">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="283*"/>
+				<ColumnDefinition Width="149*"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+            <toolkit:PhoneTextBox ActionIcon="Assets/ModernUI/appbar.camera.png" HidesActionItemWhenEmpty="False" ActionIconTapped="ButtonChoosePhotoForTitle_Click" Grid.Column="0" x:Name="OcrTitleTextBox" TextWrapping="NoWrap" ToolTipService.ToolTip="Foo" Text="Sed massa dis" Padding="0" DataContext="{Binding RecipeBaseTitle}" Grid.ColumnSpan="2" Style="{StaticResource TextBoxEditTitle}" />
+			<ListBox x:Name="ListBoxIngredients" Grid.Column="0" Grid.Row="3" ItemsSource="{Binding RecipeBaseIngredients}" ItemTemplate="{StaticResource IngredientsItemTemplate}" HorizontalAlignment="Left"/>
+			<Button x:Name="ButtonChoosePhotoForIngredients" Style="{StaticResource OcrIconButton}" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" BorderThickness="0" Padding="0" Height="72" Click="ButtonChoosePhotoForIngredients_Click" Grid.RowSpan="2"/>
+			<TextBlock x:Name="TextBlockAddIngredients" TextWrapping="Wrap" Text="ingredients" Grid.Row="2" Style="{StaticResource TextBlockTitle}" Padding="10,0,0,0" Grid.ColumnSpan="2"/>
+			<Image x:Name="RecipeImage" Source="{Binding RecipePhoto.Photo}" Grid.Row="1" VerticalAlignment="Top" MaxHeight="240" MaxWidth="380" Width="380" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <!--Show images captured here-->
+
+		</Grid>
+		<Grid x:Name="FindDescriptionGrid" Grid.Row="1" Margin="12">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Button x:Name="ButtonChoosePhotoForDescription" Style="{StaticResource OcrIconButton}" BorderThickness="0" Padding="0" Click="ButtonChoosePhotoForDescription_Click" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top"/>
+			<TextBlock x:Name="TextBlockAddContents" TextWrapping="Wrap" Text="description" Style="{StaticResource TextBlockTitle}" Padding="10,0,0,0"/>
+			<ListBox x:Name="ListBoxDescription" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding RecipeBaseContents}" HorizontalAlignment="Left" ItemTemplate="{StaticResource DescriptionItemTemplate}" VerticalAlignment="Top"/>
+		</Grid>
 	</Grid>
 
 </phone:PhoneApplicationPage>
