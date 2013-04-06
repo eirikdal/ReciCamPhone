@@ -32,7 +32,7 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1">
-        	<Grid Height="214" Width="444" VerticalAlignment="Top" HorizontalAlignment="Center">
+        	<Grid Height="214" Width="444" VerticalAlignment="Top" HorizontalAlignment="Center" Style="{StaticResource MenuGrid}">
         		<Grid.RowDefinitions>
         			<RowDefinition Height="Auto"/>
         			<RowDefinition Height="Auto"/>
