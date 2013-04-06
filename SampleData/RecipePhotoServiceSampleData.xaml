@@ -1,0 +1,327 @@
+﻿<Services:RecipePhotoService xmlns:Services="clr-namespace:ReciCam.Windows.Phone.Services" xmlns:Models="clr-namespace:ReciCam.Windows.Phone.Models" xmlns:ServiceResults="clr-namespace:Microsoft.Hawaii.Ocr.Client.ServiceResults;assembly=Microsoft.Hawaii.Ocr.Client" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Model="clr-namespace:Microsoft.Hawaii.Ocr.Client.Model;assembly=Microsoft.Hawaii.Ocr.Client" xmlns:Hawaii="clr-namespace:Microsoft.Hawaii;assembly=Microsoft.Hawaii.ClientBase">
+	<Services:RecipePhotoService.Instance>
+		<Services:RecipePhotoService>
+			<Services:RecipePhotoService.Instance>
+				<Services:RecipePhotoService>
+					<Services:RecipePhotoService.Instance>
+						<Services:RecipePhotoService/>
+					</Services:RecipePhotoService.Instance>
+					<Services:RecipePhotoService.RecipeBaseContents>
+						<Models:RecipeBase Text="Sapien viverra diam"/>
+						<Models:RecipeBase Text="Pharetra semper"/>
+					</Services:RecipePhotoService.RecipeBaseContents>
+					<Services:RecipePhotoService.RecipeBaseTitle>
+						<Models:RecipeBase Text="Aliquam integer sociis velit"/>
+					</Services:RecipePhotoService.RecipeBaseTitle>
+					<Services:RecipePhotoService.RecipeBaseTarget>
+						<Models:RecipeBase Text="Vitae quisque vivamus"/>
+					</Services:RecipePhotoService.RecipeBaseTarget>
+					<Services:RecipePhotoService.RecipeBaseIngredients>
+						<Models:RecipeBase Text="Class taciti curae"/>
+						<Models:RecipeBase Text="Placerat donec aliquam"/>
+					</Services:RecipePhotoService.RecipeBaseIngredients>
+				</Services:RecipePhotoService>
+			</Services:RecipePhotoService.Instance>
+			<Services:RecipePhotoService.RecipeBaseContents>
+				<Models:RecipeBase Text="Etiam fusce aliquet pulvinar">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="InternalServerError"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Tellus blandit">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="InternalServerError"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Eget sit">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Unspecified"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Elit commodo conubia">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Error"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Enim erat eros">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Unspecified"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Tempor tempus">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Unspecified"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Sagittis nibh">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Error"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Tortor nisi turpis nisl">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Success"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Cubilia dapibus">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="InternalServerError"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Vel senectus nunc sociosqu">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="InternalServerError"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+			</Services:RecipePhotoService.RecipeBaseContents>
+			<Services:RecipePhotoService.RecipeBaseTitle>
+				<Models:RecipeBase Text="Egestas suscipit torquent ultrices">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Success"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+			</Services:RecipePhotoService.RecipeBaseTitle>
+			<Services:RecipePhotoService.RecipeBaseTarget>
+				<Models:RecipeBase Text="Varius odio">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Unspecified"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+			</Services:RecipePhotoService.RecipeBaseTarget>
+			<Services:RecipePhotoService.RecipeBaseIngredients>
+				<Models:RecipeBase Text="Lorem vehicula nam">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Success"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Euismod sed">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="InternalServerError"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Morbi feugiat nulla">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="InternalServerError"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Proin dis gravida orci">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Unspecified"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Est augue">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Unspecified"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Hac iaculis lacinia pede">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="InternalServerError"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Dolor quam leo">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Success"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Quis aenean volutpat laoreet">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Error"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Natoque fames urna felis">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="Error"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+				<Models:RecipeBase Text="Ipsum posuere">
+					<Models:RecipeBase.OcrServiceResult>
+						<ServiceResults:OcrServiceResult Status="InternalServerError"/>
+					</Models:RecipeBase.OcrServiceResult>
+					<Models:RecipeBase.RecipePhoto>
+						<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+					</Models:RecipeBase.RecipePhoto>
+				</Models:RecipeBase>
+			</Services:RecipePhotoService.RecipeBaseIngredients>
+		</Services:RecipePhotoService>
+	</Services:RecipePhotoService.Instance>
+	<Services:RecipePhotoService.RecipeBaseContents>
+		<Models:RecipeBase Text="Potenti mauris maecenas praesent">
+			<Models:RecipeBase.OcrServiceResult>
+				<ServiceResults:OcrServiceResult Status="Success">
+					<ServiceResults:OcrServiceResult.Exception>
+						<System:Exception HelpLink="Sem posuere ultricies" Source="Nostra potenti"/>
+					</ServiceResults:OcrServiceResult.Exception>
+					<ServiceResults:OcrServiceResult.OcrResult>
+						<Model:OcrResult InternalErrorMessage="Tristique per eros sed montes"/>
+					</ServiceResults:OcrServiceResult.OcrResult>
+					<ServiceResults:OcrServiceResult.RequestId>
+						<System:Guid/>
+					</ServiceResults:OcrServiceResult.RequestId>
+				</ServiceResults:OcrServiceResult>
+			</Models:RecipeBase.OcrServiceResult>
+			<Models:RecipeBase.RecipePhoto>
+				<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+			</Models:RecipeBase.RecipePhoto>
+		</Models:RecipeBase>
+		<Models:RecipeBase Text="Pretium nullam mus nec">
+			<Models:RecipeBase.OcrServiceResult>
+				<ServiceResults:OcrServiceResult Status="InternalServerError">
+					<ServiceResults:OcrServiceResult.Exception>
+						<System:Exception HelpLink="Non adipiscing amet parturient" Source="Ante arcu vestibulum diam fringilla"/>
+					</ServiceResults:OcrServiceResult.Exception>
+					<ServiceResults:OcrServiceResult.OcrResult>
+						<Model:OcrResult InternalErrorMessage="Conubia mus maecenas nec"/>
+					</ServiceResults:OcrServiceResult.OcrResult>
+					<ServiceResults:OcrServiceResult.RequestId>
+						<System:Guid/>
+					</ServiceResults:OcrServiceResult.RequestId>
+				</ServiceResults:OcrServiceResult>
+			</Models:RecipeBase.OcrServiceResult>
+			<Models:RecipeBase.RecipePhoto>
+				<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+			</Models:RecipeBase.RecipePhoto>
+		</Models:RecipeBase>
+	</Services:RecipePhotoService.RecipeBaseContents>
+	<Services:RecipePhotoService.RecipeBaseTitle>
+		<Models:RecipeBase Text="Sed massa dis">
+			<Models:RecipeBase.OcrServiceResult>
+				<ServiceResults:OcrServiceResult Status="Unspecified">
+					<ServiceResults:OcrServiceResult.Exception>
+						<System:Exception HelpLink="Vivamus vestibulum fermentum fringilla vestibulum" Source="Habitasse aliquam hendrerit sed risus"/>
+					</ServiceResults:OcrServiceResult.Exception>
+					<ServiceResults:OcrServiceResult.OcrResult>
+						<Model:OcrResult InternalErrorMessage="Parturient litora quisque luctus"/>
+					</ServiceResults:OcrServiceResult.OcrResult>
+					<ServiceResults:OcrServiceResult.RequestId>
+						<System:Guid/>
+					</ServiceResults:OcrServiceResult.RequestId>
+				</ServiceResults:OcrServiceResult>
+			</Models:RecipeBase.OcrServiceResult>
+			<Models:RecipeBase.RecipePhoto>
+				<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+			</Models:RecipeBase.RecipePhoto>
+		</Models:RecipeBase>
+	</Services:RecipePhotoService.RecipeBaseTitle>
+	<Services:RecipePhotoService.RecipeBaseTarget>
+		<Models:RecipeBase Text="Auctor nunc metus">
+			<Models:RecipeBase.OcrServiceResult>
+				<ServiceResults:OcrServiceResult Status="Error">
+					<ServiceResults:OcrServiceResult.Exception>
+						<System:Exception HelpLink="Urna cras dis vestibulum duis" Source="Ultrices varius nunc"/>
+					</ServiceResults:OcrServiceResult.Exception>
+					<ServiceResults:OcrServiceResult.OcrResult>
+						<Model:OcrResult InternalErrorMessage="Dapibus himenaeos turpis"/>
+					</ServiceResults:OcrServiceResult.OcrResult>
+					<ServiceResults:OcrServiceResult.RequestId>
+						<System:Guid/>
+					</ServiceResults:OcrServiceResult.RequestId>
+				</ServiceResults:OcrServiceResult>
+			</Models:RecipeBase.OcrServiceResult>
+			<Models:RecipeBase.RecipePhoto>
+				<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+			</Models:RecipeBase.RecipePhoto>
+		</Models:RecipeBase>
+	</Services:RecipePhotoService.RecipeBaseTarget>
+	<Services:RecipePhotoService.RecipeBaseIngredients>
+		<Models:RecipeBase Text="Amet est">
+			<Models:RecipeBase.OcrServiceResult>
+				<ServiceResults:OcrServiceResult Status="Success">
+					<ServiceResults:OcrServiceResult.Exception>
+						<System:Exception HelpLink="Placerat pulvinar sapien" Source="Magna aliquam sagittis"/>
+					</ServiceResults:OcrServiceResult.Exception>
+					<ServiceResults:OcrServiceResult.OcrResult>
+						<Model:OcrResult InternalErrorMessage="Rutrum enim pharetra sit"/>
+					</ServiceResults:OcrServiceResult.OcrResult>
+					<ServiceResults:OcrServiceResult.RequestId>
+						<System:Guid/>
+					</ServiceResults:OcrServiceResult.RequestId>
+				</ServiceResults:OcrServiceResult>
+			</Models:RecipeBase.OcrServiceResult>
+			<Models:RecipeBase.RecipePhoto>
+				<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+			</Models:RecipeBase.RecipePhoto>
+		</Models:RecipeBase>
+		<Models:RecipeBase Text="Congue ante">
+			<Models:RecipeBase.OcrServiceResult>
+				<ServiceResults:OcrServiceResult Status="Error">
+					<ServiceResults:OcrServiceResult.Exception>
+						<System:Exception HelpLink="Natoque quam quis" Source="Nec posuere non vestibulum curae"/>
+					</ServiceResults:OcrServiceResult.Exception>
+					<ServiceResults:OcrServiceResult.OcrResult>
+						<Model:OcrResult InternalErrorMessage="Vitae pede parturient class tristique"/>
+					</ServiceResults:OcrServiceResult.OcrResult>
+					<ServiceResults:OcrServiceResult.RequestId>
+						<System:Guid/>
+					</ServiceResults:OcrServiceResult.RequestId>
+				</ServiceResults:OcrServiceResult>
+			</Models:RecipeBase.OcrServiceResult>
+			<Models:RecipeBase.RecipePhoto>
+				<Models:RecipePhoto CapturedDateTime="04/06/2013 16:23:19"/>
+			</Models:RecipeBase.RecipePhoto>
+		</Models:RecipeBase>
+	</Services:RecipePhotoService.RecipeBaseIngredients>
+</Services:RecipePhotoService>
