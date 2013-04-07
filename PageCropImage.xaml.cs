@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
@@ -11,8 +12,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using Microsoft.Hawaii.Ocr.Client.ServiceResults;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media;
 using ReciCam.Windows.Phone.Models;
 using ReciCam.Windows.Phone.Services;
@@ -21,6 +24,7 @@ namespace ReciCam.Windows.Phone
 {
     public partial class OcrCropImage : PhoneApplicationPage
     {
+        private readonly PhotoChooserTask _photoChooserTask;
         private readonly RecipePhotoService _recipePhotoService = ((App)Application.Current).RecipePhotoService;
         private readonly ReciCamOcrService _reciCamOcrService = ((App)Application.Current).ReciCamOcrService;
 
@@ -31,6 +35,8 @@ namespace ReciCam.Windows.Phone
 
         //Variable for the help popup
         Popup help = new Popup();
+
+        public WriteableBitmap OriginalImageSource { get; private set; }
 
         //Variables for the crop feature    
         Point p1, p2;
@@ -48,10 +54,6 @@ namespace ReciCam.Windows.Phone
             TextStatus.Text = "Select the cropping region with your finger." +
                               " Once completed, tap the crop button to crop the image.";
 
-            //Sets the source to the Image control on the crop page to the WriteableBitmap object created previously.
-            var recipePhoto = _recipePhotoService.RecipeBaseTarget.RecipePhoto;
-            DisplayedImageElement.Source = recipePhoto.Photo;
-
             //Create event handlers for cropping selection on the picture.
             DisplayedImageElement.MouseLeftButtonDown += new MouseButtonEventHandler(CropImage_MouseLeftButtonDown);
             DisplayedImageElement.MouseLeftButtonUp += new MouseButtonEventHandler(CropImage_MouseLeftButtonUp);
@@ -59,6 +61,9 @@ namespace ReciCam.Windows.Phone
 
             //Used for rendering the cropping rectangle on the image.
             CompositionTarget.Rendering += new EventHandler(CompositionTarget_Rendering);
+
+            _photoChooserTask = new PhotoChooserTask();
+            _photoChooserTask.Completed += new EventHandler<PhotoResult>(photoChooserTask_Completed);
 
             //Begin storyboard for rectangle color effect.
             Rectangle.Begin();
@@ -186,7 +191,6 @@ namespace ReciCam.Windows.Phone
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
         void btnReject_Click(object sender, EventArgs e)
         {
             //Sets the cropped image back to the original image. For users that want to revert changes.
@@ -209,14 +213,88 @@ namespace ReciCam.Windows.Phone
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            TextBlockContents.DataContext = _recipePhotoService.RecipeBaseTarget;
+
+            if (_recipePhotoService.RecipeBaseTarget.RecipePhoto == null)
+            {
+                _photoChooserTask.ShowCamera = true;
+                _photoChooserTask.Show();
+            }
+            else
+            {
+                DisplayedImageElement.Source = _recipePhotoService.RecipeBaseTarget.RecipePhoto.Photo;                
+            }
+        }
+
+        void photoChooserTask_Completed(object sender, PhotoResult e)
+        {
+            if (e.TaskResult == TaskResult.OK)
+            {
+                var recipePhoto = RecipePhoto.CreateFrom(e);
+                OriginalImageSource = recipePhoto.Photo;
+                //Sets the source to the Image control on the crop page to the WriteableBitmap object created previously.
+                DisplayedImageElement.Source = recipePhoto.Photo;
+
+                _recipePhotoService.RecipeBaseTarget.RecipePhoto = recipePhoto;
+
+                RefreshTitle();
+            }
+        }
+
+        private void RefreshTitle()
+        {
+            if (_recipePhotoService.RecipeBaseTarget == _recipePhotoService.RecipeBaseTitle)
+            {
+                TextBlockTitle.Text = "Find title..";
+            } else if (_recipePhotoService.RecipeBaseTarget == _recipePhotoService.RecipeBaseDescription)
+            {
+                TextBlockTitle.Text = "Find description..";
+            }
+        }
+
+        private void OnOcrRecipeBaseComplete(OcrServiceResult result)
+        {
+            var recipeBase = result.StateObject as RecipeBase;
+            Debug.Assert(recipeBase != null, "recipeBase != null");
+            recipeBase.OcrServiceResult = result;
+            result.OcrResult.OcrTexts.ForEach(ocrText => recipeBase.Text += recipeBase.FormatOcrText(ocrText));
+
+            ProgressBar.Visibility = Visibility.Collapsed;
+            btnAccept.IsEnabled = true;
+
+            CropNextImage();
+        }
+
         void btnAccept_Click(object sender, EventArgs e)
         {
             //Make progress bar visible for the event handler as there may be posible latency.
             ProgressBar.Visibility = Visibility.Visible;
+            btnAccept.IsEnabled = false;
+            _reciCamOcrService.StartOcrConversion(_recipePhotoService.RecipeBaseTarget, OnOcrRecipeBaseComplete);
+        }
 
-            _reciCamOcrService.StartOcrConversion(_recipePhotoService.RecipeBaseTarget);
-
-            NavigationService.Navigate(new Uri("/PageAddContent.xaml", UriKind.Relative));
+        private void CropNextImage()
+        {
+            DisplayedImageElement.Source = OriginalImageSource;
+            if (_recipePhotoService.RecipeBaseTitle.RecipePhoto == null)
+            {
+                TextBlockTitle.Text = "Find title..";
+                _recipePhotoService.RecipeBaseTitle.RecipePhoto = RecipePhoto.CreateFrom(OriginalImageSource);
+                _recipePhotoService.RecipeBaseTarget = _recipePhotoService.RecipeBaseTitle;
+                RefreshTitle();
+            } else if (_recipePhotoService.RecipeBaseDescription.RecipePhoto == null)
+            {
+                _recipePhotoService.RecipeBaseDescription.RecipePhoto = RecipePhoto.CreateFrom(OriginalImageSource);
+                _recipePhotoService.RecipeBaseTarget = _recipePhotoService.RecipeBaseDescription;
+                RefreshTitle();
+            } else
+            {
+                NavigationService.Navigate(new Uri("/PageAddContent.xaml", UriKind.Relative));                
+            }
         }
 
 
