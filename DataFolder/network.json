@@ -1,0 +1,34 @@
+﻿{
+	layers {
+		layer {
+			name: "input",
+			type: "input",
+			size: 5,
+			func: "sigmoid"	
+		},
+		layer {
+			name: "hidden",
+			type: "hidden",
+			size: 5,
+			func: "sigmoid"	
+		},
+		layer {
+			name: "output",
+			type: "output",
+			size: 4,
+			func: "sigmoid"	
+		}
+	}
+	links {
+		link {
+			pre: "input",
+			post: "hidden",
+			top: "full"
+		}
+		link {
+			pre: "hidden",
+			post: "output",
+			top: "full"
+		}
+	}
+}

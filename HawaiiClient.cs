@@ -4,7 +4,7 @@
 // </copyright>
 // -
 
-namespace ReciCam.Windows.Phone
+namespace SnapBook.Windows.Phone
 {
     using System.Windows;
 

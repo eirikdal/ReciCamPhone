@@ -5,22 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using ReciCam.Windows.Phone.Models;
+using SnapBook.Windows.Phone.Models;
+using SnapBook.Windows.Phone.ViewModel;
 
-namespace ReciCam.Windows.Phone.Services
+namespace SnapBook.Windows.Phone.Services
 {
     public class RecipeService
     {
         private RecipeService()
         {   
+            Recipes = new ObservableCollection<RecipeViewModel>();
         }
 
-        public ObservableCollection<Recipe> Recipes { get; set; }
-
-        public static Recipe CreateRecipe(RecipeBase recipeBaseTitle, ObservableCollection<RecipeBase> recipeBaseIngredients, ObservableCollection<RecipeBase> recipeBaseContents)
-        {
-            return Recipe.CreateFrom(recipeBaseTitle, recipeBaseIngredients, recipeBaseContents);
-        }
+        public ObservableCollection<RecipeViewModel> Recipes { get; set; }
 
         // Private 'instance' variable
         static private RecipeService instance;

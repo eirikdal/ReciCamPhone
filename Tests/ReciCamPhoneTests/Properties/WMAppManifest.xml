@@ -2,7 +2,7 @@
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US"/>
-  <App xmlns="" ProductID="{38d119ca-cba0-4295-8f9a-465ef14c0f15}" Title="ReciCamPhoneTests" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="ReciCamPhoneTests author" Description="Sample description" Publisher="ReciCamPhoneTests" PublisherID="{54ead847-3f65-4492-bffa-209875cceb81}">
+  <App xmlns="" ProductID="{38d119ca-cba0-4295-8f9a-465ef14c0f15}" Title="SnapBookPhoneTests" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="SnapBookPhoneTests author" Description="Sample description" Publisher="SnapBookPhoneTests" PublisherID="{54ead847-3f65-4492-bffa-209875cceb81}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING"/>
@@ -15,12 +15,12 @@
       <DefaultTask  Name ="_default" NavigationPage="MainPage.xaml"/>
     </Tasks>
     <Tokens>
-      <PrimaryToken TokenID="ReciCamPhoneTestsToken" TaskName="_default">
+      <PrimaryToken TokenID="SnapBookPhoneTestsToken" TaskName="_default">
         <TemplateFlip>
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>ReciCamPhoneTests</Title>
+          <Title>SnapBookPhoneTests</Title>
           <BackContent></BackContent>
           <BackBackgroundImageURI></BackBackgroundImageURI>
           <BackTitle></BackTitle>

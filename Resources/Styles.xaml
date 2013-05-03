@@ -60,8 +60,8 @@
         <Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"></Setter>
     </Style>
     <Style x:Key="TextBlockTitle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe WP SemiLight"></Setter>
-        <Setter Property="FontSize" Value="32"></Setter>
+        <Setter Property="FontFamily" Value="Segoe WP Black"></Setter>
+        <Setter Property="FontSize" Value="24"></Setter>
     </Style>
     <Style x:Key="MenuGrid" TargetType="Grid"/>
 </ResourceDictionary>

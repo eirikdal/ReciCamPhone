@@ -1,13 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
-namespace ReciCamPhoneTests
+namespace SnapBookPhoneTests
 {
     [TestClass]
-    public class ReciCamOcrServiceTests
+    public class SnapBookOcrServiceTests
     {
         [TestMethod]
-        public void ReciCamOcrServiceTestsUnitTest()
+        public void SnapBookOcrServiceTestsUnitTest()
         {
+            Assert.IsTrue(true);
 
         } 
     }

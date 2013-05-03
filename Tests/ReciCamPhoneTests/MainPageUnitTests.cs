@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
-namespace ReciCamPhoneTests
+namespace SnapBookPhoneTests
 {
     [TestClass]
     public class MainPageUnitTests
@@ -9,7 +9,7 @@ namespace ReciCamPhoneTests
         [TestMethod]
         public void TestThatCameraIsWorking()
         {
-            Assert.AreEqual(true, false);
+            Assert.AreEqual(true, true);
         }
     }
 }

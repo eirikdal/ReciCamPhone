@@ -7,23 +7,19 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Microsoft.Phone.Tasks;
-using RestSharp;
 
 namespace SnapBook.Windows.Phone
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class MultiTouchImage : UserControl
     {
-        public MainPage()
+        public MultiTouchImage()
         {
             InitializeComponent();
-
-            ListBoxRecipes.ItemsSource = App.ViewModel.RecipeModels;
         }
 
-        private void New_Click(object sender, EventArgs e)
+        private void DoubleTapBehavior_DoubleTap(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/PageAddContent.xaml", UriKind.Relative));
+
         }
     }
 }

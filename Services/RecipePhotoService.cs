@@ -5,25 +5,21 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Microsoft.Hawaii.Ocr.Client.ServiceResults;
-using ReciCam.Windows.Phone.Models;
+using SnapBook.Windows.Phone.Models;
+using SnapBook.Windows.Phone.ViewModel;
 
-namespace ReciCam.Windows.Phone.Services
+namespace SnapBook.Windows.Phone.Services
 {
     public class RecipePhotoService
     {
-        public RecipeBase RecipeBaseTitle { get; set; }
-        public RecipeBase RecipeBaseDescription { get; set; }
-        public ObservableCollection<RecipeBase> RecipeBaseContents { get; set; }
-        public ObservableCollection<RecipeBase> RecipeBaseIngredients { get; set; }
+        public RecipeModel Recipe { get; set; }
+        public WriteableBitmap OriginalImageSource { get; set; }
 
         public RecipeBase RecipeBaseTarget { get; set; }
 
         public RecipePhotoService()
         {
-            RecipeBaseTitle = new RecipeBase();
-            RecipeBaseDescription = new RecipeBase();
-            RecipeBaseIngredients = new ObservableCollection<RecipeBase>();
-            RecipeBaseContents = new ObservableCollection<RecipeBase>();
+            Recipe = new RecipeModel();
         }
 
         public RecipePhoto CropImage(WriteableBitmap photo, Image displaydImagElement, Point p1, Point p2)

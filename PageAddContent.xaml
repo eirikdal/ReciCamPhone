@@ -5,71 +5,118 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Models="clr-namespace:ReciCam.Windows.Phone.Models"
-    xmlns:Services="clr-namespace:ReciCam.Windows.Phone.Services"
+    xmlns:Services="clr-namespace:SnapBook.Windows.Phone.Services"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    x:Class="ReciCam.Windows.Phone.PageAddContent"
+    xmlns:helpers="clr-namespace:SnapBook.Windows.Phone.Helpers"
+    x:Class="SnapBook.Windows.Phone.PageAddContent"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" d:DataContext="{d:DesignData /SampleData/RecipePhotoServiceSampleData.xaml}">
-	<phone:PhoneApplicationPage.ApplicationBar>
-		<shell:ApplicationBar>
-			<shell:ApplicationBar.MenuItems>
-				<shell:ApplicationBarMenuItem x:Name="menuItemAddIngredients" Text="Add ingredients.." Click="ButtonChoosePhotoForIngredients_Click"/>
-				<shell:ApplicationBarMenuItem x:Name="menuItemAddDescription" Text="add description.." Click="ButtonChoosePhotoForDescription_Click"/>
-				<shell:ApplicationBarMenuItem x:Name="menuItemAddContent" Text="add content.." Click="ButtonChoosePhotoForContent_Click"/>
-			</shell:ApplicationBar.MenuItems>
-            <shell:ApplicationBarIconButton IconUri="/Assets/ModernUI/appbar.check.png" Click="ButtonDone_Click" IsEnabled="True" Text="Done"/>
-		</shell:ApplicationBar>
-	</phone:PhoneApplicationPage.ApplicationBar>
+    shell:SystemTray.IsVisible="True">
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem x:Name="menuItemAddIngredients" Text="Add ingredients.." Click="ButtonChoosePhotoForIngredients_Click"/>
+                <shell:ApplicationBarMenuItem x:Name="menuItemAddDescription" Text="add description.." Click="ButtonChoosePhotoForDescription_Click"/>
+                <shell:ApplicationBarMenuItem x:Name="menuItemAddContent" Text="add content.." Click="ButtonChoosePhotoForContent_Click"/>
+            </shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton IconUri="/Assets/dark/appbar.check.png" Click="ButtonDone_Click" IsEnabled="True" Text="Done"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-	<!--LayoutRoot is the root grid where all page content is placed-->
-	<Grid x:Name="LayoutRoot" Background="Transparent">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-		<!--Pivot Control-->
-		<Path Data="M864.179,-91.7015" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="0" Margin="864.179,-91.701,-384.179,0" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" VerticalAlignment="Top" Width="0"/>
-        
-		<ProgressBar Height="10" x:Name="ProgressBar" Visibility="Collapsed" Margin="12,0,8,255" IsIndeterminate="True"  VerticalAlignment="Bottom"  />
-		<Grid x:Name="AddTitleGrid" Style="{StaticResource MenuGrid}" Margin="12">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="283*"/>
-				<ColumnDefinition Width="149*"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
-            <toolkit:PhoneTextBox ActionIcon="Assets/ModernUI/appbar.camera.png" HidesActionItemWhenEmpty="False" ActionIconTapped="ButtonChoosePhotoForTitle_Click" Grid.Column="0" x:Name="OcrTitleTextBox" TextWrapping="NoWrap" ToolTipService.ToolTip="Foo" Text="Sed massa dis" Padding="0" DataContext="{Binding RecipeBaseTitle}" Grid.ColumnSpan="2" Style="{StaticResource TextBoxEditTitle}" />
-			<ListBox x:Name="ListBoxIngredients" Grid.Column="0" Grid.Row="3" ItemsSource="{Binding RecipeBaseIngredients}" ItemTemplate="{StaticResource IngredientsItemTemplate}" HorizontalAlignment="Left"/>
-			<Button x:Name="ButtonChoosePhotoForIngredients" Style="{StaticResource OcrIconButton}" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="2" BorderThickness="0" Padding="0" Height="72" Click="ButtonChoosePhotoForIngredients_Click" Grid.RowSpan="2"/>
-			<TextBlock x:Name="TextBlockAddIngredients" TextWrapping="Wrap" Text="ingredients" Grid.Row="2" Style="{StaticResource TextBlockTitle}" Padding="10,0,0,0" Grid.ColumnSpan="2"/>
-			<Image x:Name="RecipeImage" Source="{Binding RecipePhoto.Photo}" Grid.Row="1" VerticalAlignment="Top" MaxHeight="240" MaxWidth="380" Width="380" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
-            <!--Show images captured here-->
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--Pivot Control-->
+        <Path Data="M864.179,-91.7015" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="0" Margin="864.179,-91.701,-384.179,0" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" VerticalAlignment="Top" Width="0"/>
 
-		</Grid>
-		<Grid x:Name="FindDescriptionGrid" Grid.Row="1" Margin="12">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
-			<Button x:Name="ButtonChoosePhotoForDescription" Style="{StaticResource OcrIconButton}" BorderThickness="0" Padding="0" Click="ButtonChoosePhotoForDescription_Click" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top"/>
-			<TextBlock x:Name="TextBlockAddContents" TextWrapping="Wrap" Text="description" Style="{StaticResource TextBlockTitle}" Padding="10,0,0,0"/>
-			<ListBox x:Name="ListBoxDescription" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding RecipeBaseContents}" HorizontalAlignment="Left" ItemTemplate="{StaticResource DescriptionItemTemplate}" VerticalAlignment="Top"/>
-		</Grid>
-	</Grid>
+        <ProgressBar Height="10" x:Name="ProgressBar" Visibility="Collapsed" Margin="12,0,8,255" IsIndeterminate="True"  VerticalAlignment="Bottom"  />
 
+        <phone:Panorama>
+            <phone:PanoramaItem>
+                <Grid x:Name="AddTitleGrid" Background="Transparent">
+
+                    <Grid.Resources>
+                        <helpers:StringToUpperConverter x:Key="ToUpperConverter"/>
+                    </Grid.Resources>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+                        <TextBlock x:Name="ApplicationTitle" Text="SnapBook" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock x:Name="PageTitle" Text="page title" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+                    </StackPanel>
+
+                    <Grid Grid.Row="1" Margin="24,12,24,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+                            <toolkit:PhoneTextBox Hint="[Enter title for your recipe]" 
+                                          HidesActionItemWhenEmpty="False"
+                                          ActionIconTapped="ButtonChoosePhotoForTitle_Click"
+                                          Grid.Column="0" x:Name="OcrTitleTextBox"
+                                          TextWrapping="NoWrap"
+                                          ToolTipService.ToolTip="Foo"
+                                          Text="{Binding Text, Mode=TwoWay}"
+                                          Padding="0"
+                                          Margin="0,-12,0,0"
+                                          DataContext="{Binding RecipeBaseTitle}"
+                                          Grid.ColumnSpan="2"
+                                          Style="{StaticResource TextBoxEditTitle}" />
+                            <!--<TextBlock Margin="0,-12,0,0" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding Title}" TextWrapping="Wrap"/>--><!--<TextBlock Margin="0,-12,0,0" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Text="{Binding Title}" TextWrapping="Wrap"/>-->
+                            <TextBlock FontSize="{StaticResource PhoneFontSizeNormal}" Text="{Binding Information}" TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                        <Grid Margin="0,0,0,12" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Image x:Name="RecipeImage" Source="{Binding RecipePhoto.Photo}" 
+                                   Grid.Row="1" VerticalAlignment="Top" 
+                                   Width="172" Height="172"
+                                   HorizontalAlignment="Left" 
+                                   Grid.ColumnSpan="2"/>
+                            <StackPanel Grid.Row="1" Margin="0,6,0,0">
+                                <TextBlock FontWeight="Black" FontSize="{StaticResource PhoneFontSizeSmall}" Text="{Binding Title, Converter={StaticResource ToUpperConverter}}" TextWrapping="Wrap"/>
+                                <TextBlock FontFamily="{StaticResource PhoneFontFamilySemiBold}" FontSize="{StaticResource PhoneFontSizeSmall}" Text="{Binding Information}" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <toolkit:PhoneTextBox x:Name="OcrDescriptionTextBox" Grid.Row="1" Grid.ColumnSpan="2"  TextWrapping="Wrap" Style="{StaticResource TextBoxEditContent}" ActionIconTapped="ButtonChoosePhotoForDescription_Click" Text="{Binding Text, Mode=TwoWay}"/>
+                    </Grid>
+                </Grid>
+            </phone:PanoramaItem>
+            <phone:PanoramaItem>
+                <Grid x:Name="FindDescriptionGrid" Grid.Row="1" Margin="12" Style="{StaticResource MenuGrid}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="TextBlockAddContents" TextWrapping="Wrap" Text="description" Style="{StaticResource TextBlockTitle}" Padding="10,0,0,0" Grid.ColumnSpan="2" Grid.Row="2"/>
+                    <ListBox x:Name="ListBoxContents" Grid.Column="0" ItemsSource="{Binding RecipeBaseContents}" ItemTemplate="{StaticResource DescriptionItemTemplate}" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="3"/>
+                    <ListBox x:Name="ListBoxIngredients" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding RecipeBaseIngredients}" ItemTemplate="{StaticResource IngredientsItemTemplate}" VerticalContentAlignment="Top"/>
+                    <TextBlock x:Name="TextBlockAddIngredients" TextWrapping="Wrap" Text="ingredients" Style="{StaticResource TextBlockTitle}" Padding="10,0,0,0"/>
+                </Grid>
+            </phone:PanoramaItem>
+        </phone:Panorama>
+    </Grid>
 </phone:PhoneApplicationPage>

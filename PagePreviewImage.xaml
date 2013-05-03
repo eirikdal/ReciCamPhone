@@ -1,0 +1,71 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Services="clr-namespace:SnapBook.Windows.Phone.Services"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:local="clr-namespace:SnapBook.Windows.Phone"
+    xmlns:behaviors="clr-namespace:MultiTouch.Behaviors.Silverlight4;assembly=MultiTouch.Behaviors.WP80"
+    xmlns:gestures="clr-namespace:MultiTouch.Behaviors.Silverlight4.Gestures;assembly=MultiTouch.Behaviors.WP80"
+    x:Class="SnapBook.Windows.Phone.OcrCropImage"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.FontFamily>
+        <StaticResource ResourceKey="PhoneFontFamilyNormal"/>
+    </phone:PhoneApplicationPage.FontFamily>
+    <phone:PhoneApplicationPage.FontSize>
+        <StaticResource ResourceKey="PhoneFontSizeNormal"/>
+    </phone:PhoneApplicationPage.FontSize>
+    <phone:PhoneApplicationPage.Foreground>
+        <StaticResource ResourceKey="PhoneForegroundBrush"/>
+    </phone:PhoneApplicationPage.Foreground>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton x:Name="BtnEdit" IconUri="/Assets/dark/appbar.edit.png" Click="btnEdit_Click" IsEnabled="True" Text="Edit"/>
+            <shell:ApplicationBarIconButton x:Name="BtnAccept" IconUri="/Assets/dark/appbar.check.png" Click="btnAccept_Click" IsEnabled="True" Text="Accept"/>
+            <shell:ApplicationBarIconButton x:Name="BtnReject" IconUri="/Assets/dark/appbar.cancel.png" Click="btnReject_Click" IsEnabled="False" Text="Reject"/>
+            <shell:ApplicationBarIconButton x:Name="BtnHelp" IconUri="/Assets/dark/appbar.question.png" Click="btnHelp_Click" IsEnabled="True" Text="Help"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="{StaticResource ApplicationName}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="TextBlockTitle" Text="Preview Image" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" d:IsHidden="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Canvas x:Name="canvas" Width="480" Height="300"  Grid.Row="0">
+                <!--Image for the WriteableBitmap object destined for cropping.-->
+                <Image x:Name="DisplayedImageElement" Height="300" Width="480" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+
+            <!--Application progress bar.-->
+            <ProgressBar Height="10" x:Name="ProgressBar" Visibility="Collapsed" Margin="12,0,8,255" IsIndeterminate="True"  VerticalAlignment="Bottom"  />
+            <TextBlock Height="70" x:Name="TextBlockContents" Text="" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,379,80,-379" Grid.Row="1" />
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

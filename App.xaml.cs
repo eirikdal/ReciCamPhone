@@ -8,18 +8,30 @@ using System.Windows;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using ReciCam.Windows.Phone.Services;
+using SnapBook.Windows.Phone.Models;
+using SnapBook.Windows.Phone.Services;
+using SnapBook.Windows.Phone.ViewModel;
 
-namespace ReciCam.Windows.Phone
+namespace SnapBook.Windows.Phone
 {
     public partial class App : Application
     {
+        // The static ViewModel, to be used across the application.
+        private static RecipeViewModel viewModel;
+        public static RecipeViewModel ViewModel
+        {
+            get { return viewModel; }
+        }
+
         public RecipeService RecipeService { get { return RecipeService.Instance; } private set { } }
-        public ReciCamOcrService ReciCamOcrService { get { return ReciCamOcrService.Instance; } private set { } }
+        public RecipeOcrService RecipeOcrService { get { return RecipeOcrService.Instance; } private set { } }
         public RecipePhotoService RecipePhotoService { get { return RecipePhotoService.Instance; } private set { } }
 
         // Avoid double-initialization
         private bool phoneApplicationInitialized = false;
+
+        // Specify the local database connection string.
+        string DBConnectionString = "Data Source=isostore:/Recipes.sdf";
 
         /// <summary>
         /// Initializes a new instance of the App class.
@@ -48,6 +60,25 @@ namespace ReciCam.Windows.Phone
 
             // Phone-specific initialization
             this.InitializePhoneApplication();
+
+            // Create the database if it does not exist.
+            using (RecipeDataContext db = new RecipeDataContext(DBConnectionString))
+            {
+                if (db.DatabaseExists() == false)
+                {
+                    // Create the local database.
+                    db.CreateDatabase();
+
+                    // Save categories to the database.
+                    db.SubmitChanges();
+                }
+            }
+
+            // Create the ViewModel object.
+            viewModel = new RecipeViewModel(DBConnectionString);
+
+            // Query the local database and load observable collections.
+            viewModel.LoadCollectionsFromDatabase();
         }
 
         /// <summary>

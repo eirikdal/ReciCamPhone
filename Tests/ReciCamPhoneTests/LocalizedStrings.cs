@@ -1,6 +1,6 @@
-﻿using ReciCamPhoneTests.Resources;
+﻿using SnapBookTests.Resources;
 
-namespace ReciCamPhoneTests
+namespace SnapBookPhoneTests
 {
     /// <summary>
     /// Provides access to string resources.

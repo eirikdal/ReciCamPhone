@@ -6,9 +6,9 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using ReciCamPhoneTests.Resources;
+using SnapBookTests.Resources;
 
-namespace ReciCamPhoneTests
+namespace SnapBookPhoneTests
 {
     public partial class App : Application
     {

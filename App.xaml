@@ -3,17 +3,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" mc:Ignorable="d" 
-    x:Class="ReciCam.Windows.Phone.App"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:system="clr-namespace:System;assembly=System" mc:Ignorable="d" 
+    x:Class="SnapBook.Windows.Phone.App"
     >
 
     <!--Application Resources-->
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources\Styles.xaml" />
-                <ResourceDictionary Source="Resources\GlobalResources.xaml"/>
-                <ResourceDictionary Source="Resources\TextBoxStyles.xaml"/>
+            	<ResourceDictionary Source="Resources\Styles.xaml" />
+            	<ResourceDictionary Source="Resources\GlobalResources.xaml"/>
+            	<ResourceDictionary Source="Resources\TextBoxStyles.xaml"/>
+            	<ResourceDictionary Source="Resources\DataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
         	<Style x:Key="TextBoxIngredients" TargetType="TextBox">
         		<Setter Property="FontSize" Value="16"/>
@@ -25,20 +27,14 @@
         		<Setter Property="SelectionBackground" Value="{StaticResource PhoneSubtleBrush}"/>
         		<Setter Property="SelectionForeground" Value="{StaticResource PhoneSubtleBrush}"/>
         	</Style>
-        	<DataTemplate x:Key="IngredientsItemTemplate">
-                <toolkit:PhoneTextBox TextWrapping="Wrap" Style="{StaticResource OcrContents}" Text="{Binding Text, Mode=TwoWay}" FontSize="16"/>
-        	</DataTemplate>
-        	<DataTemplate x:Key="DescriptionItemTemplate">
-        		<toolkit:PhoneTextBox TextWrapping="Wrap" Style="{StaticResource OcrContents}" Text="{Binding Text, Mode=TwoWay}" FontSize="16"/>
-        	</DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
         <!--Required object that handles lifetime events for the application-->
-        <shell:PhoneApplicationService 
-            Launching="Application_Launching" Closing="Application_Closing" 
-            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+    	<shell:PhoneApplicationService 
+    		Launching="Application_Launching" Closing="Application_Closing" 
+    		Activated="Application_Activated" Deactivated="Application_Deactivated"/>
     </Application.ApplicationLifetimeObjects>
 
 </Application>
